@@ -47,6 +47,24 @@ func _ready():
 		
 	$Flowers/RevealContainer1.material.set_shader_param("reveal_texture", _reveal_viewport1.get_texture())
 
+	for node in $Flowers/BackgroundContainer/Viewport/World.get_children():
+		if node.is_in_group("Reveal1"):
+			var mat = ShaderMaterial.new()
+			mat.shader = load("res://Materials/RevealShader.tres")
+			mat.set_shader_param("tex", node.texture)
+			mat.set_shader_param("modulate", node.modulate)
+			mat.set_shader_param("reveal_tex", _reveal_viewport1.get_texture())
+			node.material_override = mat
+			
+		if node.is_in_group("Hide1"):
+			var mat = ShaderMaterial.new()
+			mat.shader = load("res://Materials/RevealShader.tres")
+			mat.set_shader_param("tex", node.texture)
+			mat.set_shader_param("modulate", node.modulate)
+			mat.set_shader_param("reveal_tex", _reveal_viewport1.get_texture())
+			mat.set_shader_param("hide", 1.0)
+			node.material_override = mat
+
 
 func _process(delta):
 	if _game_state.current != GameState.GAME:

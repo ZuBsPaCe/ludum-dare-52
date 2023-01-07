@@ -1,22 +1,44 @@
 [gd_resource type="Shader" format=2]
 
 [resource]
-code = "shader_type canvas_item;
+code = "shader_type spatial;
+render_mode async_visible,blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx, unshaded;
 
-uniform sampler2D reveal_texture: hint_white;
+uniform sampler2D tex;
+uniform sampler2D reveal_tex: hint_white;
+uniform vec4 modulate;
+uniform float hide = 0.0;
+
 uniform float layer1 = 1.0;
 uniform float layer2 = 0.0;
 uniform float layer3 = 0.0;
 
 void fragment() {
-	vec2 uv = vec2(UV.x, 1.0 - UV.y);
+	//vec2 uv = vec2(UV.x, 1.0 - UV.y);
+	vec2 uv = vec2(UV.x, UV.y);
+	float unhide = 1.0 - hide;
 	
-	vec4 col = texture(TEXTURE, uv);
-	vec4 reveal = texture(reveal_texture, uv);
+	vec2 screen_uv = vec2(SCREEN_UV.x, 1.0 - SCREEN_UV.y);
 	
-	col.a = min(reveal.r * layer1 + reveal.g * layer2 + reveal.b * layer3, 1.0);
+	//vec4 col = texture(TEXTURE, uv);
+	vec4 reveal = texture(reveal_tex, screen_uv);
+//
+//	col.a = min(reveal.r * layer1 + reveal.g * layer2 + reveal.b * layer3, 1.0);
+
+	vec4 col = texture(tex, uv);
+	//col.rgb = vec3(1.0, 0.0, 0.0);
+	col *= modulate;
 	
-	COLOR = col;
+	//col.rgb = lerp(0)
+	//col.rgb *= (1.0 - hide) * reveal.rgb;
+	col.rgb = mix(col.rgb * reveal.rgb, col.rgb, hide);
+	
+	
+	//col.a = min(reveal.r * layer1 + reveal.g * layer2 + reveal.b * layer3, 1.0);
+	col.a = mix(col.a * reveal.a, col.a * (1.0 - reveal.a), hide);
+	
+	ALBEDO = col.rgb;
+	ALPHA = col.a;
 }
 
 "

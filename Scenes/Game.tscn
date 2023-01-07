@@ -1,15 +1,11 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scripts/Tools/Examples/ExampleGame.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Tools/CameraShake.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/MainMenu.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/Tools/StateMachine.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/GameOverlay.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Sprites/Flowers/CityMoon.png" type="Texture" id=6]
-[ext_resource path="res://Sprites/Flowers/City.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/Flowers/CityBackground.png" type="Texture" id=8]
-[ext_resource path="res://Sprites/Flowers/CityStreet.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/Flowers/CitySkyScraper.png" type="Texture" id=10]
+[ext_resource path="res://Scenes/World.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Sprites/Flowers/NatureSun.png" type="Texture" id=11]
 [ext_resource path="res://Sprites/Flowers/NatureBackground.png" type="Texture" id=12]
 [ext_resource path="res://Sprites/Flowers/NatureTree.png" type="Texture" id=13]
@@ -21,6 +17,8 @@
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 18 )
+shader_param/modulate = null
+shader_param/hide = 0.0
 shader_param/layer1 = 0.0
 shader_param/layer2 = 1.0
 shader_param/layer3 = 0.0
@@ -55,6 +53,7 @@ script = ExtResource( 2 )
 
 [node name="RevealViewport1" type="Viewport" parent="."]
 size = Vector2( 1920, 1080 )
+transparent_bg = true
 render_target_v_flip = true
 
 [node name="Flowers" type="Spatial" parent="."]
@@ -70,42 +69,10 @@ transparent_bg = true
 handle_input_locally = false
 render_target_update_mode = 3
 
-[node name="CityBackground" type="Sprite3D" parent="Flowers/BackgroundContainer/Viewport"]
-modulate = Color( 0.145098, 0.282353, 0.376471, 1 )
-texture = ExtResource( 8 )
-
-[node name="CityMoon" type="Sprite3D" parent="Flowers/BackgroundContainer/Viewport"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.84935, 5.1942, 1.90249 )
-modulate = Color( 0.752941, 0.74902, 0.666667, 1 )
-alpha_cut = 2
-texture = ExtResource( 6 )
-
-[node name="City" type="Sprite3D" parent="Flowers/BackgroundContainer/Viewport"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.145073, -2.90586, 2.67308 )
-modulate = Color( 0.588235, 0.596078, 0.6, 1 )
-alpha_cut = 2
-texture = ExtResource( 7 )
-
-[node name="CityStreet" type="Sprite3D" parent="Flowers/BackgroundContainer/Viewport"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.45674, -3.86453, 3.21327 )
-modulate = Color( 0.576471, 0.588235, 0.596078, 1 )
-alpha_cut = 2
-texture = ExtResource( 9 )
-
-[node name="CitySkyScraper" type="Sprite3D" parent="Flowers/BackgroundContainer/Viewport"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.0159, -1.94516, 3.80085 )
-modulate = Color( 0.631373, 0.705882, 0.74902, 1 )
-alpha_cut = 2
-texture = ExtResource( 10 )
-
-[node name="Camera" type="Camera" parent="Flowers/BackgroundContainer/Viewport"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40 )
-keep_aspect = 0
-fov = 30.0
-size = 10.0
-far = 1000.0
+[node name="World" parent="Flowers/BackgroundContainer/Viewport" instance=ExtResource( 6 )]
 
 [node name="RevealContainer1" type="ViewportContainer" parent="Flowers"]
+visible = false
 material = SubResource( 3 )
 margin_right = 1920.0
 margin_bottom = 1080.0
@@ -116,7 +83,7 @@ own_world = true
 transparent_bg = true
 handle_input_locally = false
 render_target_v_flip = true
-render_target_update_mode = 3
+render_target_update_mode = 0
 
 [node name="Camera" type="Camera" parent="Flowers/RevealContainer1/Viewport"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40 )

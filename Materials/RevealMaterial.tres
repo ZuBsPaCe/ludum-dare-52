@@ -1,11 +1,14 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=2]
 
 [ext_resource path="res://Materials/RevealShader.tres" type="Shader" id=1]
-[ext_resource path="res://Sprites/Helpers/Black-1920x1080.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Flowers/NatureForest.png" type="Texture" id=2]
 
 [resource]
+resource_local_to_scene = true
 shader = ExtResource( 1 )
+shader_param/modulate = null
+shader_param/hide = 0.0
 shader_param/layer1 = 0.0
 shader_param/layer2 = 1.0
 shader_param/layer3 = 0.0
-shader_param/reveal_texture = ExtResource( 2 )
+shader_param/tex = ExtResource( 2 )
