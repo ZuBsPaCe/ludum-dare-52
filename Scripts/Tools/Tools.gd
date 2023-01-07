@@ -40,6 +40,13 @@ func manhattan_distance(from: Coord, to: Coord) -> float:
 	return abs(to.x - from.x) + abs(to.y - from.y)
 
 
+func get_children_recursive(parent: Node, result := []) -> Array:
+	for child in parent.get_children():
+		result.append(child)
+		get_children_recursive(child, result)
+	return result
+
+
 # Array of Arrays: Radius => List of coord offsets
 var _coord_offsets_in_circle := [[Coord.new()]]
 var _distances_in_circle := [[0.0]]

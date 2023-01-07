@@ -12,8 +12,13 @@ const SETTING_SOUND_VOLUME := "Sound"
 const REVEAL_TIME := 8.0
 const AREA_REVEAL_TIME := 4.0
 
-const AREAS_FLOWER_HILLS := "FlowerHills"
-const AREAS_FLOWER_TREE := "FlowerTree"
+const AREAS_FLOWER_HILLS := "FlowerHills" #1
+const AREAS_FLOWER_TREE := "FlowerTree" #2
+const AREAS_FLOWER_STREAM := "FlowerStream" #3
+const AREAS_FLOWER_BEEHIVE := "FlowerBeehive" #4
+const AREAS_FLOWER_SUN := "FlowerSun" #5
+const AREAS_FLOWER_FIELD := "FlowerField" #6
+const AREAS_FLOWER_BEES := "FlowerBees" #7
 
 var _center_node: Node2D
 var _settings: Dictionary

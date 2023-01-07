@@ -7,9 +7,9 @@ enum FlowerLevelState {
 	RESET,
 	FLOWER_HILLS,
 	FLOWER_TREE,
-	FLOWER_STREAM
+	FLOWER_STREAM,
+	FLOWER_BEEHIVE_SUN_FIELD,
 }
-
 
 
 export(GameState) var _initial_game_state := GameState.MAIN_MENU
@@ -21,6 +21,13 @@ onready var _game_state := $GameStateMachine
 onready var _flower_level_state := $FlowerLevelStateMachine
 onready var _reveal_viewport1 := $RevealViewport1
 onready var _reveal_viewport2 := $RevealViewport2
+onready var _reveal_viewport3 := $RevealViewport3
+onready var _reveal_viewport4 := $RevealViewport4
+onready var _reveal_viewport5 := $RevealViewport5
+onready var _reveal_viewport6 := $RevealViewport6
+onready var _reveal_viewport7 := $RevealViewport7
+
+onready var _flower_level_done_player := $Levels/BackgroundContainer/Viewport/World/Flower/FlowerLevelDonePlayer
 
 
 var _splotch_countdown := Cooldown.new()
@@ -68,67 +75,83 @@ func _ready():
 		_area_groups[area_group.name] = area_group
 		
 
-	for node in $Flowers/BackgroundContainer/Viewport/World.get_children():
+	for node in Tools.get_children_recursive($Levels/BackgroundContainer/Viewport/World):
+		if not node is Sprite3D:
+			continue
+			
 		var reveal1: bool = node.is_in_group("Reveal1")
 		var reveal2: bool = node.is_in_group("Reveal2")
+		var reveal3: bool = node.is_in_group("Reveal3")
+		var reveal4: bool = node.is_in_group("Reveal4")
+		var reveal5: bool = node.is_in_group("Reveal5")
+		var reveal6: bool = node.is_in_group("Reveal6")
+		var reveal7: bool = node.is_in_group("Reveal7")
 		
 		var hide1: bool = node.is_in_group("Hide1")
 		var hide2: bool = node.is_in_group("Hide2")
+		var hide3: bool = node.is_in_group("Hide3")
+		var hide4: bool = node.is_in_group("Hide4")
+		var hide5: bool = node.is_in_group("Hide5")
+		var hide6: bool = node.is_in_group("Hide6")
+		var hide7: bool = node.is_in_group("Hide7")
 		
-		var set_reveal_shader := reveal1 || reveal2 || hide1 || hide2
+		var reveal := false
+		var hide := false
+		var reveal_viewport
 		
-		if set_reveal_shader:
+		if reveal1 || reveal2 || reveal3 || reveal4 || reveal5 || reveal6 || reveal7:
+			reveal = true
+		if hide1 || hide2 || hide3 || hide4 || hide5 || hide6 || hide7:
+			hide = true
+		if reveal1 || hide1:
+			reveal_viewport = _reveal_viewport1
+		if reveal2 || hide2:
+			reveal_viewport = _reveal_viewport2
+		if reveal3 || hide3:
+			reveal_viewport = _reveal_viewport3
+		if reveal4 || hide4:
+			reveal_viewport = _reveal_viewport4
+		if reveal5 || hide5:
+			reveal_viewport = _reveal_viewport5
+		if reveal6 || hide6:
+			reveal_viewport = _reveal_viewport6
+		if reveal7 || hide7:
+			reveal_viewport = _reveal_viewport7
+		
+		if reveal or hide:
 			var mat = ShaderMaterial.new()
 			mat.shader = load("res://Materials/RevealShader.tres")
 			mat.set_shader_param("tex", node.texture)
 			mat.set_shader_param("modulate", node.modulate)
 			
-			if reveal1 || hide1:
-				mat.set_shader_param("reveal_tex", _reveal_viewport1.get_texture())
-			elif reveal2 || hide2:
-				mat.set_shader_param("reveal_tex", _reveal_viewport2.get_texture())
+			mat.set_shader_param("reveal_tex", reveal_viewport.get_texture())
 			
-			if hide1 || hide2:
+			if hide:
 				mat.set_shader_param("hide", 1.0)
 				
 			node.material_override = mat
-		
-#		if node.is_in_group("Reveal1"):
-#			var mat = ShaderMaterial.new()
-#			mat.shader = load("res://Materials/RevealShader.tres")
-#			mat.set_shader_param("tex", node.texture)
-#			mat.set_shader_param("modulate", node.modulate)
-#			mat.set_shader_param("reveal_tex", _reveal_viewport1.get_texture())
-#			node.material_override = mat
-#
-#		if node.is_in_group("Hide1"):
-#			var mat = ShaderMaterial.new()
-#			mat.shader = load("res://Materials/RevealShader.tres")
-#			mat.set_shader_param("tex", node.texture)
-#			mat.set_shader_param("modulate", node.modulate)
-#			mat.set_shader_param("reveal_tex", _reveal_viewport1.get_texture())
-#			mat.set_shader_param("hide", 1.0)
-#			node.material_override = mat
-
 
 
 func _process(delta):
 	if _game_state.current != GameState.GAME:
 		return
-	
-#	$Dummy.position += $Dummy.position.direction_to(Globals.get_global_mouse_position()) * 100.0 * delta
-#	$Dummy.rotation = -PI * 0.5 + $Dummy.position.angle_to_point(Globals.get_global_mouse_position())
+		
+	#	$Dummy.position += $Dummy.position.direction_to(Globals.get_global_mouse_position()) * 100.0 * delta
+	#	$Dummy.rotation = -PI * 0.5 + $Dummy.position.angle_to_point(Globals.get_global_mouse_position())
 	
 	$RevealCursor.position = Globals.get_global_mouse_position()
 	
 	if Input.is_mouse_button_pressed(BUTTON_LEFT) && _splotch_countdown.done:
 		_splotch_countdown.restart()
-		var splotch: Node2D = _splotch1_scene.instance()
-		splotch.position = Globals.get_global_mouse_position()
-		splotch.rotation = randf() * TAU
+		
+		var pos := Globals.get_global_mouse_position()
+		var rot := randf() * TAU
 		
 		for area_group in _area_groups.values():
 			if area_group.active:
+				var splotch: Node2D = _splotch1_scene.instance()
+				splotch.position = pos
+				splotch.rotation = rot
 				area_group.reveal_viewport.add_child(splotch)
 		
 		for area in $RevealCursor/RevealCursorArea.get_overlapping_areas():
@@ -220,13 +243,18 @@ func _on_FlowerLevel_enter_state():
 			_area_groups[Globals.AREAS_FLOWER_TREE].activate()
 		
 		FlowerLevelState.FLOWER_STREAM:
-			pass
+			_area_groups[Globals.AREAS_FLOWER_STREAM].activate()
+		
+		FlowerLevelState.FLOWER_BEEHIVE_SUN_FIELD:
+			_area_groups[Globals.AREAS_FLOWER_BEEHIVE].activate()
+			_area_groups[Globals.AREAS_FLOWER_SUN].activate()
+			_area_groups[Globals.AREAS_FLOWER_FIELD].activate()
 
 		_:
 			assert(false, "Unknown game state")
 
 
-func _on_FlowerLevel_process_state():
+func _on_FlowerLevel_process_state():	
 	match _flower_level_state.current:			
 		FlowerLevelState.FLOWER_HILLS:
 			if _area_groups[Globals.AREAS_FLOWER_HILLS].revealed:
@@ -237,7 +265,19 @@ func _on_FlowerLevel_process_state():
 				_flower_level_state.set_state(FlowerLevelState.FLOWER_STREAM)
 		
 		FlowerLevelState.FLOWER_STREAM:
-			pass
+			if _area_groups[Globals.AREAS_FLOWER_STREAM].revealed:
+				_flower_level_state.set_state(FlowerLevelState.FLOWER_BEEHIVE_SUN_FIELD)
+			
+		FlowerLevelState.FLOWER_BEEHIVE_SUN_FIELD:
+			if (!_area_groups[Globals.AREAS_FLOWER_BEES].active and
+				_area_groups[Globals.AREAS_FLOWER_SUN].revealed):
+				_area_groups[Globals.AREAS_FLOWER_BEES].activate()
+			
+			if (_area_groups[Globals.AREAS_FLOWER_FIELD].can_reveal and 
+				_area_groups[Globals.AREAS_FLOWER_BEES].can_reveal):
+				_area_groups[Globals.AREAS_FLOWER_FIELD].reveal()
+				_area_groups[Globals.AREAS_FLOWER_BEES].reveal()
+				_flower_level_done_player.play("LevelDone")
 
 		_:
 			assert(false, "Unknown game state")
