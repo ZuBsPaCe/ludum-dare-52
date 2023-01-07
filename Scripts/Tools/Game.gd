@@ -3,6 +3,14 @@ extends Node2D
 
 const GameState := preload("res://Scripts/Tools/Examples/ExampleGameState.gd").GameState
 
+enum FlowerLevelState {
+	RESET,
+	FLOWER_HILLS,
+	FLOWER_TREE,
+	FLOWER_STREAM
+}
+
+
 
 export(GameState) var _initial_game_state := GameState.MAIN_MENU
 
@@ -10,11 +18,14 @@ export(PackedScene) var _splotch1_scene
 
 
 onready var _game_state := $GameStateMachine
+onready var _flower_level_state := $FlowerLevelStateMachine
 onready var _reveal_viewport1 := $RevealViewport1
+onready var _reveal_viewport2 := $RevealViewport2
 
 
 var _splotch_countdown := Cooldown.new()
 
+var _area_groups := {}
 
 func _ready():
 	Globals.setup()
@@ -41,29 +52,64 @@ func _ready():
 		funcref(self, "_on_GameStateMachine_enter_state"),
 		FuncRef.new(),
 		funcref(self, "_on_GameStateMachine_exit_state"))
+		
+	_flower_level_state.setup(
+		FlowerLevelState.RESET,
+		funcref(self, "_on_FlowerLevel_enter_state"),
+		funcref(self, "_on_FlowerLevel_process_state"),
+		funcref(self, "_on_FlowerLevel_exit_state"))
+		
+	_flower_level_state.set_process(false)
 	
 	
 	_splotch_countdown.setup(self, 0.05, true)
+	
+	for area_group in $RevealAreas.get_children():
+		_area_groups[area_group.name] = area_group
 		
-	$Flowers/RevealContainer1.material.set_shader_param("reveal_texture", _reveal_viewport1.get_texture())
 
 	for node in $Flowers/BackgroundContainer/Viewport/World.get_children():
-		if node.is_in_group("Reveal1"):
+		var reveal1: bool = node.is_in_group("Reveal1")
+		var reveal2: bool = node.is_in_group("Reveal2")
+		
+		var hide1: bool = node.is_in_group("Hide1")
+		var hide2: bool = node.is_in_group("Hide2")
+		
+		var set_reveal_shader := reveal1 || reveal2 || hide1 || hide2
+		
+		if set_reveal_shader:
 			var mat = ShaderMaterial.new()
 			mat.shader = load("res://Materials/RevealShader.tres")
 			mat.set_shader_param("tex", node.texture)
 			mat.set_shader_param("modulate", node.modulate)
-			mat.set_shader_param("reveal_tex", _reveal_viewport1.get_texture())
-			node.material_override = mat
 			
-		if node.is_in_group("Hide1"):
-			var mat = ShaderMaterial.new()
-			mat.shader = load("res://Materials/RevealShader.tres")
-			mat.set_shader_param("tex", node.texture)
-			mat.set_shader_param("modulate", node.modulate)
-			mat.set_shader_param("reveal_tex", _reveal_viewport1.get_texture())
-			mat.set_shader_param("hide", 1.0)
+			if reveal1 || hide1:
+				mat.set_shader_param("reveal_tex", _reveal_viewport1.get_texture())
+			elif reveal2 || hide2:
+				mat.set_shader_param("reveal_tex", _reveal_viewport2.get_texture())
+			
+			if hide1 || hide2:
+				mat.set_shader_param("hide", 1.0)
+				
 			node.material_override = mat
+		
+#		if node.is_in_group("Reveal1"):
+#			var mat = ShaderMaterial.new()
+#			mat.shader = load("res://Materials/RevealShader.tres")
+#			mat.set_shader_param("tex", node.texture)
+#			mat.set_shader_param("modulate", node.modulate)
+#			mat.set_shader_param("reveal_tex", _reveal_viewport1.get_texture())
+#			node.material_override = mat
+#
+#		if node.is_in_group("Hide1"):
+#			var mat = ShaderMaterial.new()
+#			mat.shader = load("res://Materials/RevealShader.tres")
+#			mat.set_shader_param("tex", node.texture)
+#			mat.set_shader_param("modulate", node.modulate)
+#			mat.set_shader_param("reveal_tex", _reveal_viewport1.get_texture())
+#			mat.set_shader_param("hide", 1.0)
+#			node.material_override = mat
+
 
 
 func _process(delta):
@@ -73,12 +119,21 @@ func _process(delta):
 #	$Dummy.position += $Dummy.position.direction_to(Globals.get_global_mouse_position()) * 100.0 * delta
 #	$Dummy.rotation = -PI * 0.5 + $Dummy.position.angle_to_point(Globals.get_global_mouse_position())
 	
+	$RevealCursor.position = Globals.get_global_mouse_position()
+	
 	if Input.is_mouse_button_pressed(BUTTON_LEFT) && _splotch_countdown.done:
 		_splotch_countdown.restart()
 		var splotch: Node2D = _splotch1_scene.instance()
 		splotch.position = Globals.get_global_mouse_position()
 		splotch.rotation = randf() * TAU
-		_reveal_viewport1.add_child(splotch)
+		
+		for area_group in _area_groups.values():
+			if area_group.active:
+				area_group.reveal_viewport.add_child(splotch)
+		
+		for area in $RevealCursor/RevealCursorArea.get_overlapping_areas():
+			var cooldown = area.get_meta("cooldown")
+			cooldown.restart()
 
 
 func _input(event):
@@ -132,6 +187,9 @@ func _on_GameStateMachine_enter_state():
 			State.on_game_start()
 			$GameOverlay.visible = true
 			Effects.shake(Vector2.RIGHT)
+			
+			_flower_level_state.set_state_immediate(FlowerLevelState.FLOWER_HILLS)
+			_flower_level_state.set_process(true)
 
 		_:
 			assert(false, "Unknown game state")
@@ -148,3 +206,42 @@ func _on_GameStateMachine_exit_state():
 
 		_:
 			assert(false, "Unknown game state")
+			
+			
+func _on_FlowerLevel_enter_state():
+	match _flower_level_state.current:
+		FlowerLevelState.RESET:
+			_flower_level_state.set_state(FlowerLevelState.FLOWER_HILLS)
+		
+		FlowerLevelState.FLOWER_HILLS:
+			_area_groups[Globals.AREAS_FLOWER_HILLS].activate()
+
+		FlowerLevelState.FLOWER_TREE:
+			_area_groups[Globals.AREAS_FLOWER_TREE].activate()
+		
+		FlowerLevelState.FLOWER_STREAM:
+			pass
+
+		_:
+			assert(false, "Unknown game state")
+
+
+func _on_FlowerLevel_process_state():
+	match _flower_level_state.current:			
+		FlowerLevelState.FLOWER_HILLS:
+			if _area_groups[Globals.AREAS_FLOWER_HILLS].revealed:
+				_flower_level_state.set_state(FlowerLevelState.FLOWER_TREE)
+
+		FlowerLevelState.FLOWER_TREE:
+			if _area_groups[Globals.AREAS_FLOWER_TREE].revealed:
+				_flower_level_state.set_state(FlowerLevelState.FLOWER_STREAM)
+		
+		FlowerLevelState.FLOWER_STREAM:
+			pass
+
+		_:
+			assert(false, "Unknown game state")
+
+func _on_FlowerLevel_exit_state():
+	pass
+

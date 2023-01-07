@@ -9,6 +9,11 @@ const SETTING_WINDOW_HEIGHT := "Window Height"
 const SETTING_MUSIC_VOLUME := "Music"
 const SETTING_SOUND_VOLUME := "Sound"
 
+const REVEAL_TIME := 8.0
+const AREA_REVEAL_TIME := 4.0
+
+const AREAS_FLOWER_HILLS := "FlowerHills"
+const AREAS_FLOWER_TREE := "FlowerTree"
 
 var _center_node: Node2D
 var _settings: Dictionary

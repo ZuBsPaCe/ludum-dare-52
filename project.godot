@@ -48,7 +48,7 @@ config/windows_native_icon="res://Sprites/Icon/icon.ico"
 
 [autoload]
 
-Globals="*res://Scripts/Tools/Examples/ExampleGlobals.gd"
+Globals="*res://Scripts/Autoload/Globals.gd"
 Tools="*res://Scripts/Tools/Tools.gd"
 State="*res://Scripts/Tools/Examples/ExampleState.gd"
 Effects="*res://Scripts/Tools/Examples/ExampleEffects.gd"

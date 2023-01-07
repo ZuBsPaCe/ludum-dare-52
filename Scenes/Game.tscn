@@ -1,27 +1,21 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://Scripts/Tools/Examples/ExampleGame.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Tools/Game.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Tools/CameraShake.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/MainMenu.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/Tools/StateMachine.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/GameOverlay.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/World.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Sprites/Flowers/NatureSun.png" type="Texture" id=11]
-[ext_resource path="res://Sprites/Flowers/NatureBackground.png" type="Texture" id=12]
-[ext_resource path="res://Sprites/Flowers/NatureTree.png" type="Texture" id=13]
-[ext_resource path="res://Sprites/Flowers/NatureForest.png" type="Texture" id=14]
-[ext_resource path="res://Sprites/Flowers/NatureStream.png" type="Texture" id=15]
-[ext_resource path="res://Sprites/Flowers/NatureHills.png" type="Texture" id=16]
+[ext_resource path="res://Sprites/Helpers/White-1920x1080.png" type="Texture" id=7]
+[ext_resource path="res://Scripts/RevealViewport.gd" type="Script" id=8]
+[ext_resource path="res://Scripts/AreaGroup.gd" type="Script" id=9]
 [ext_resource path="res://Scenes/Splotch1.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Materials/RevealShader.tres" type="Shader" id=18]
 
-[sub_resource type="ShaderMaterial" id=3]
-shader = ExtResource( 18 )
-shader_param/modulate = null
-shader_param/hide = 0.0
-shader_param/layer1 = 0.0
-shader_param/layer2 = 1.0
-shader_param/layer3 = 0.0
+[sub_resource type="CircleShape2D" id=2]
+radius = 100.0
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 100.0
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -40,6 +34,9 @@ _splotch1_scene = ExtResource( 17 )
 [node name="GameStateMachine" type="Node" parent="."]
 script = ExtResource( 4 )
 
+[node name="FlowerLevelStateMachine" type="Node" parent="."]
+script = ExtResource( 4 )
+
 [node name="MainMenu" parent="." instance=ExtResource( 3 )]
 
 [node name="GameOverlay" parent="." instance=ExtResource( 5 )]
@@ -54,7 +51,28 @@ script = ExtResource( 2 )
 [node name="RevealViewport1" type="Viewport" parent="."]
 size = Vector2( 1920, 1080 )
 transparent_bg = true
+disable_3d = true
+usage = 0
 render_target_v_flip = true
+script = ExtResource( 8 )
+
+[node name="White" type="Sprite" parent="RevealViewport1"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 960, 540 )
+texture = ExtResource( 7 )
+
+[node name="RevealViewport2" type="Viewport" parent="."]
+size = Vector2( 1920, 1080 )
+transparent_bg = true
+disable_3d = true
+usage = 0
+render_target_v_flip = true
+script = ExtResource( 8 )
+
+[node name="White" type="Sprite" parent="RevealViewport2"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 960, 540 )
+texture = ExtResource( 7 )
 
 [node name="Flowers" type="Spatial" parent="."]
 
@@ -71,60 +89,164 @@ render_target_update_mode = 3
 
 [node name="World" parent="Flowers/BackgroundContainer/Viewport" instance=ExtResource( 6 )]
 
-[node name="RevealContainer1" type="ViewportContainer" parent="Flowers"]
-visible = false
-material = SubResource( 3 )
-margin_right = 1920.0
-margin_bottom = 1080.0
+[node name="RevealAreas" type="Node2D" parent="."]
+z_index = 10
 
-[node name="Viewport" type="Viewport" parent="Flowers/RevealContainer1"]
-size = Vector2( 1920, 1080 )
-own_world = true
-transparent_bg = true
-handle_input_locally = false
-render_target_v_flip = true
-render_target_update_mode = 0
+[node name="FlowerHills" type="Node2D" parent="RevealAreas"]
+script = ExtResource( 9 )
+_reveal_viewport_path = NodePath("../../RevealViewport1")
 
-[node name="Camera" type="Camera" parent="Flowers/RevealContainer1/Viewport"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40 )
-keep_aspect = 0
-fov = 30.0
-size = 10.0
-far = 1000.0
+[node name="Area2D" type="Area2D" parent="RevealAreas/FlowerHills"]
+position = Vector2( 119, 599 )
+collision_layer = 0
 
-[node name="NatureBackground" type="Sprite3D" parent="Flowers/RevealContainer1/Viewport"]
-visible = false
-texture = ExtResource( 12 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FlowerHills/Area2D"]
+shape = SubResource( 2 )
 
-[node name="NatureSun" type="Sprite3D" parent="Flowers/RevealContainer1/Viewport"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.84935, 5.1942, 1.90249 )
-visible = false
-alpha_cut = 2
-texture = ExtResource( 11 )
+[node name="Area2D2" type="Area2D" parent="RevealAreas/FlowerHills"]
+position = Vector2( 122, 834 )
+collision_layer = 0
 
-[node name="NatureForest" type="Sprite3D" parent="Flowers/RevealContainer1/Viewport"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.145073, 0.281404, 2.17087 )
-modulate = Color( 0.352941, 0.545098, 0.411765, 1 )
-alpha_cut = 2
-texture = ExtResource( 14 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FlowerHills/Area2D2"]
+shape = SubResource( 2 )
 
-[node name="NatureHills" type="Sprite3D" parent="Flowers/RevealContainer1/Viewport"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.145073, -2.90586, 2.67308 )
-modulate = Color( 0.643137, 0.764706, 0.635294, 1 )
-alpha_cut = 2
-texture = ExtResource( 16 )
+[node name="Area2D3" type="Area2D" parent="RevealAreas/FlowerHills"]
+position = Vector2( 330, 617 )
+collision_layer = 0
 
-[node name="NatureStream" type="Sprite3D" parent="Flowers/RevealContainer1/Viewport"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.45674, -3.86453, 3.21327 )
-visible = false
-alpha_cut = 2
-texture = ExtResource( 15 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FlowerHills/Area2D3"]
+shape = SubResource( 2 )
 
-[node name="NatureTree" type="Sprite3D" parent="Flowers/RevealContainer1/Viewport"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.0159, -1.94516, 3.80085 )
-visible = false
-alpha_cut = 2
-texture = ExtResource( 13 )
+[node name="Area2D4" type="Area2D" parent="RevealAreas/FlowerHills"]
+position = Vector2( 337, 859 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FlowerHills/Area2D4"]
+shape = SubResource( 2 )
+
+[node name="Area2D5" type="Area2D" parent="RevealAreas/FlowerHills"]
+position = Vector2( 556, 634 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FlowerHills/Area2D5"]
+shape = SubResource( 2 )
+
+[node name="Area2D6" type="Area2D" parent="RevealAreas/FlowerHills"]
+position = Vector2( 556, 848 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FlowerHills/Area2D6"]
+shape = SubResource( 2 )
+
+[node name="Area2D7" type="Area2D" parent="RevealAreas/FlowerHills"]
+position = Vector2( 756, 771 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FlowerHills/Area2D7"]
+shape = SubResource( 2 )
+
+[node name="Area2D8" type="Area2D" parent="RevealAreas/FlowerHills"]
+position = Vector2( 922, 636 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FlowerHills/Area2D8"]
+shape = SubResource( 2 )
+
+[node name="Area2D9" type="Area2D" parent="RevealAreas/FlowerHills"]
+position = Vector2( 1127, 670 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FlowerHills/Area2D9"]
+shape = SubResource( 2 )
+
+[node name="Area2D10" type="Area2D" parent="RevealAreas/FlowerHills"]
+position = Vector2( 1262, 511 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FlowerHills/Area2D10"]
+shape = SubResource( 2 )
+
+[node name="Area2D11" type="Area2D" parent="RevealAreas/FlowerHills"]
+position = Vector2( 1470, 577 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FlowerHills/Area2D11"]
+shape = SubResource( 2 )
+
+[node name="FlowerTree" type="Node2D" parent="RevealAreas"]
+script = ExtResource( 9 )
+_reveal_viewport_path = NodePath("../../RevealViewport2")
+
+[node name="Area2D" type="Area2D" parent="RevealAreas/FlowerTree"]
+position = Vector2( 1146, 1023 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FlowerTree/Area2D"]
+shape = SubResource( 2 )
+
+[node name="Area2D2" type="Area2D" parent="RevealAreas/FlowerTree"]
+position = Vector2( 1346, 983 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FlowerTree/Area2D2"]
+shape = SubResource( 2 )
+
+[node name="Area2D3" type="Area2D" parent="RevealAreas/FlowerTree"]
+position = Vector2( 1546, 959 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FlowerTree/Area2D3"]
+shape = SubResource( 2 )
+
+[node name="Area2D4" type="Area2D" parent="RevealAreas/FlowerTree"]
+position = Vector2( 1779, 978 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FlowerTree/Area2D4"]
+shape = SubResource( 2 )
+
+[node name="Area2D5" type="Area2D" parent="RevealAreas/FlowerTree"]
+position = Vector2( 1863, 756 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FlowerTree/Area2D5"]
+shape = SubResource( 2 )
+
+[node name="Area2D6" type="Area2D" parent="RevealAreas/FlowerTree"]
+position = Vector2( 1857, 564 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FlowerTree/Area2D6"]
+shape = SubResource( 2 )
+
+[node name="Area2D7" type="Area2D" parent="RevealAreas/FlowerTree"]
+position = Vector2( 1776, 389 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FlowerTree/Area2D7"]
+shape = SubResource( 2 )
+
+[node name="Area2D8" type="Area2D" parent="RevealAreas/FlowerTree"]
+position = Vector2( 1639, 616 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FlowerTree/Area2D8"]
+shape = SubResource( 2 )
+
+[node name="Area2D9" type="Area2D" parent="RevealAreas/FlowerTree"]
+position = Vector2( 1410, 632 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FlowerTree/Area2D9"]
+shape = SubResource( 2 )
+
+[node name="RevealCursor" type="Node2D" parent="."]
+z_index = 11
+
+[node name="RevealCursorArea" type="Area2D" parent="RevealCursor"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealCursor/RevealCursorArea"]
+shape = SubResource( 3 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
