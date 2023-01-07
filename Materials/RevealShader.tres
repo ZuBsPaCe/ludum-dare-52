@@ -1,0 +1,22 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+
+uniform sampler2D reveal_texture: hint_white;
+uniform float layer1 = 1.0;
+uniform float layer2 = 0.0;
+uniform float layer3 = 0.0;
+
+void fragment() {
+	vec2 uv = vec2(UV.x, 1.0 - UV.y);
+	
+	vec4 col = texture(TEXTURE, uv);
+	vec4 reveal = texture(reveal_texture, uv);
+	
+	col.a = min(reveal.r * layer1 + reveal.g * layer2 + reveal.b * layer3, 1.0);
+	
+	COLOR = col;
+}
+
+"

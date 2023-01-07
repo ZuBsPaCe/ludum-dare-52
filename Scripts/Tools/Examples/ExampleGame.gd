@@ -6,8 +6,14 @@ const GameState := preload("res://Scripts/Tools/Examples/ExampleGameState.gd").G
 
 export(GameState) var _initial_game_state := GameState.MAIN_MENU
 
+export(PackedScene) var _splotch1_scene
+
 
 onready var _game_state := $GameStateMachine
+onready var _reveal_viewport1 := $RevealViewport1
+
+
+var _splotch_countdown := Cooldown.new()
 
 
 func _ready():
@@ -35,14 +41,26 @@ func _ready():
 		funcref(self, "_on_GameStateMachine_enter_state"),
 		FuncRef.new(),
 		funcref(self, "_on_GameStateMachine_exit_state"))
+	
+	
+	_splotch_countdown.setup(self, 0.05, true)
+		
+	$Flowers/RevealContainer1.material.set_shader_param("reveal_texture", _reveal_viewport1.get_texture())
 
 
 func _process(delta):
 	if _game_state.current != GameState.GAME:
 		return
 	
-	$Dummy.position += $Dummy.position.direction_to(Globals.get_global_mouse_position()) * 100.0 * delta
-	$Dummy.rotation = -PI * 0.5 + $Dummy.position.angle_to_point(Globals.get_global_mouse_position())
+#	$Dummy.position += $Dummy.position.direction_to(Globals.get_global_mouse_position()) * 100.0 * delta
+#	$Dummy.rotation = -PI * 0.5 + $Dummy.position.angle_to_point(Globals.get_global_mouse_position())
+	
+	if Input.is_mouse_button_pressed(BUTTON_LEFT) && _splotch_countdown.done:
+		_splotch_countdown.restart()
+		var splotch: Node2D = _splotch1_scene.instance()
+		splotch.position = Globals.get_global_mouse_position()
+		splotch.rotation = randf() * TAU
+		_reveal_viewport1.add_child(splotch)
 
 
 func _input(event):

@@ -1,15 +1,33 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scripts/Tools/Examples/ExampleGame.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Tools/CameraShake.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/MainMenu.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/Tools/StateMachine.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/GameOverlay.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Sprites/Flowers/CityMoon.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Flowers/City.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Flowers/CityBackground.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Flowers/CityStreet.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Flowers/CitySkyScraper.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Flowers/NatureSun.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/Flowers/NatureBackground.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/Flowers/NatureTree.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/Flowers/NatureForest.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/Flowers/NatureStream.png" type="Texture" id=15]
+[ext_resource path="res://Sprites/Flowers/NatureHills.png" type="Texture" id=16]
+[ext_resource path="res://Scenes/Splotch1.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Materials/RevealShader.tres" type="Shader" id=18]
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 18 )
+shader_param/layer1 = 0.0
+shader_param/layer2 = 1.0
+shader_param/layer3 = 0.0
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
 background_canvas_max_layer = 1
-glow_enabled = true
 glow_levels/4 = true
 glow_intensity = 5.06
 glow_strength = 1.42
@@ -19,6 +37,7 @@ glow_high_quality = true
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
+_splotch1_scene = ExtResource( 17 )
 
 [node name="GameStateMachine" type="Node" parent="."]
 script = ExtResource( 4 )
@@ -30,13 +49,115 @@ script = ExtResource( 4 )
 [node name="EntityContainer" type="Node2D" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 960, 540 )
 current = true
 script = ExtResource( 2 )
 
-[node name="Dummy" type="Polygon2D" parent="."]
-position = Vector2( 11.6237, 10.5366 )
-color = Color( 1, 0, 0, 1 )
-polygon = PoolVector2Array( -11.6237, -10.5366, -27.6237, 21.4634, 4.37634, 21.4634 )
+[node name="RevealViewport1" type="Viewport" parent="."]
+size = Vector2( 1920, 1080 )
+render_target_v_flip = true
+
+[node name="Flowers" type="Spatial" parent="."]
+
+[node name="BackgroundContainer" type="ViewportContainer" parent="Flowers"]
+margin_right = 1920.0
+margin_bottom = 1080.0
+
+[node name="Viewport" type="Viewport" parent="Flowers/BackgroundContainer"]
+size = Vector2( 1920, 1080 )
+own_world = true
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="CityBackground" type="Sprite3D" parent="Flowers/BackgroundContainer/Viewport"]
+modulate = Color( 0.145098, 0.282353, 0.376471, 1 )
+texture = ExtResource( 8 )
+
+[node name="CityMoon" type="Sprite3D" parent="Flowers/BackgroundContainer/Viewport"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.84935, 5.1942, 1.90249 )
+modulate = Color( 0.752941, 0.74902, 0.666667, 1 )
+alpha_cut = 2
+texture = ExtResource( 6 )
+
+[node name="City" type="Sprite3D" parent="Flowers/BackgroundContainer/Viewport"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.145073, -2.90586, 2.67308 )
+modulate = Color( 0.588235, 0.596078, 0.6, 1 )
+alpha_cut = 2
+texture = ExtResource( 7 )
+
+[node name="CityStreet" type="Sprite3D" parent="Flowers/BackgroundContainer/Viewport"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.45674, -3.86453, 3.21327 )
+modulate = Color( 0.576471, 0.588235, 0.596078, 1 )
+alpha_cut = 2
+texture = ExtResource( 9 )
+
+[node name="CitySkyScraper" type="Sprite3D" parent="Flowers/BackgroundContainer/Viewport"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.0159, -1.94516, 3.80085 )
+modulate = Color( 0.631373, 0.705882, 0.74902, 1 )
+alpha_cut = 2
+texture = ExtResource( 10 )
+
+[node name="Camera" type="Camera" parent="Flowers/BackgroundContainer/Viewport"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40 )
+keep_aspect = 0
+fov = 30.0
+size = 10.0
+far = 1000.0
+
+[node name="RevealContainer1" type="ViewportContainer" parent="Flowers"]
+material = SubResource( 3 )
+margin_right = 1920.0
+margin_bottom = 1080.0
+
+[node name="Viewport" type="Viewport" parent="Flowers/RevealContainer1"]
+size = Vector2( 1920, 1080 )
+own_world = true
+transparent_bg = true
+handle_input_locally = false
+render_target_v_flip = true
+render_target_update_mode = 3
+
+[node name="Camera" type="Camera" parent="Flowers/RevealContainer1/Viewport"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40 )
+keep_aspect = 0
+fov = 30.0
+size = 10.0
+far = 1000.0
+
+[node name="NatureBackground" type="Sprite3D" parent="Flowers/RevealContainer1/Viewport"]
+visible = false
+texture = ExtResource( 12 )
+
+[node name="NatureSun" type="Sprite3D" parent="Flowers/RevealContainer1/Viewport"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.84935, 5.1942, 1.90249 )
+visible = false
+alpha_cut = 2
+texture = ExtResource( 11 )
+
+[node name="NatureForest" type="Sprite3D" parent="Flowers/RevealContainer1/Viewport"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.145073, 0.281404, 2.17087 )
+modulate = Color( 0.352941, 0.545098, 0.411765, 1 )
+alpha_cut = 2
+texture = ExtResource( 14 )
+
+[node name="NatureHills" type="Sprite3D" parent="Flowers/RevealContainer1/Viewport"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.145073, -2.90586, 2.67308 )
+modulate = Color( 0.643137, 0.764706, 0.635294, 1 )
+alpha_cut = 2
+texture = ExtResource( 16 )
+
+[node name="NatureStream" type="Sprite3D" parent="Flowers/RevealContainer1/Viewport"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.45674, -3.86453, 3.21327 )
+visible = false
+alpha_cut = 2
+texture = ExtResource( 15 )
+
+[node name="NatureTree" type="Sprite3D" parent="Flowers/RevealContainer1/Viewport"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.0159, -1.94516, 3.80085 )
+visible = false
+alpha_cut = 2
+texture = ExtResource( 13 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
