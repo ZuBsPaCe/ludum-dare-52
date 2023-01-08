@@ -25,6 +25,22 @@ enum FlowerLevelState {
 	FLOWER_DONE
 }
 
+enum AppleLevelState {
+	RESET,
+	APPLE_SMALL_TREE,
+	APPLE_MEDIUM_TREE,
+	APPLE_LARGE_TREE,
+	APPLE_FRUITS,
+	APPLE_PATH,
+	APPLE_NEWTON_WALK1,
+	APPLE_NEWTON_WALK2,
+	APPLE_NEWTON_WALK3,
+	APPLE_NEWTON_WALK4,
+	APPLE_NEWTON_SIT,
+	APPLE_NEWTON_HEUREKA,
+	APPLE_DONE
+}
+
 
 export(GameState) var _initial_game_state := GameState.MAIN_MENU
 
@@ -34,6 +50,7 @@ export(PackedScene) var _splotch1_scene
 onready var _game_state := $GameStateMachine
 onready var _farm_level_state := $FarmLevelStateMachine
 onready var _flower_level_state := $FlowerLevelStateMachine
+onready var _apple_level_state := $AppleLevelStateMachine
 onready var _reveal_viewport1 := $RevealViewport1
 onready var _reveal_viewport2 := $RevealViewport2
 onready var _reveal_viewport3 := $RevealViewport3
@@ -41,15 +58,20 @@ onready var _reveal_viewport4 := $RevealViewport4
 onready var _reveal_viewport5 := $RevealViewport5
 onready var _reveal_viewport6 := $RevealViewport6
 onready var _reveal_viewport7 := $RevealViewport7
+onready var _reveal_viewport8 := $RevealViewport8
+onready var _reveal_viewport9 := $RevealViewport9
+onready var _reveal_viewport10 := $RevealViewport10
 
 onready var _farm_level_rain_particles := $Levels/BackgroundContainer/Viewport/World/Farm/FarmRain
 onready var _farm_level_done_player := $Levels/BackgroundContainer/Viewport/World/Farm/FarmLevelDonePlayer
 onready var _flower_level_done_player := $Levels/BackgroundContainer/Viewport/World/Flower/FlowerLevelDonePlayer
+onready var _apple_level_done_player := $Levels/BackgroundContainer/Viewport/World/Apple/AppleLevelDonePlayer
 
 
 var _splotch_countdown := Cooldown.new()
 
 var _area_groups := {}
+var _world_nodes := {}
 
 func _ready():
 	Globals.setup()
@@ -89,8 +111,15 @@ func _ready():
 		funcref(self, "_on_FlowerLevel_process_state"),
 		funcref(self, "_on_FlowerLevel_exit_state"))
 		
+	_apple_level_state.setup(
+		AppleLevelState.RESET,
+		funcref(self, "_on_AppleLevel_enter_state"),
+		funcref(self, "_on_AppleLevel_process_state"),
+		funcref(self, "_on_AppleLevel_exit_state"))
+		
 	_farm_level_state.set_process(false)
 	_flower_level_state.set_process(false)
+	_apple_level_state.set_process(false)
 	
 	
 	_splotch_countdown.setup(self, 0.05, true)
@@ -110,6 +139,9 @@ func _ready():
 		var reveal5: bool = node.is_in_group("Reveal5")
 		var reveal6: bool = node.is_in_group("Reveal6")
 		var reveal7: bool = node.is_in_group("Reveal7")
+		var reveal8: bool = node.is_in_group("Reveal8")
+		var reveal9: bool = node.is_in_group("Reveal9")
+		var reveal10: bool = node.is_in_group("Reveal10")
 		
 		var hide1: bool = node.is_in_group("Hide1")
 		var hide2: bool = node.is_in_group("Hide2")
@@ -118,14 +150,17 @@ func _ready():
 		var hide5: bool = node.is_in_group("Hide5")
 		var hide6: bool = node.is_in_group("Hide6")
 		var hide7: bool = node.is_in_group("Hide7")
+		var hide8: bool = node.is_in_group("Hide8")
+		var hide9: bool = node.is_in_group("Hide9")
+		var hide10: bool = node.is_in_group("Hide10")
 		
 		var reveal := false
 		var hide := false
 		var reveal_viewport
 		
-		if reveal1 || reveal2 || reveal3 || reveal4 || reveal5 || reveal6 || reveal7:
+		if reveal1 || reveal2 || reveal3 || reveal4 || reveal5 || reveal6 || reveal7 || reveal8 || reveal9 || reveal10:
 			reveal = true
-		if hide1 || hide2 || hide3 || hide4 || hide5 || hide6 || hide7:
+		if hide1 || hide2 || hide3 || hide4 || hide5 || hide6 || hide7 || hide8 || hide9 || hide10:
 			hide = true
 		if reveal1 || hide1:
 			reveal_viewport = _reveal_viewport1
@@ -141,6 +176,12 @@ func _ready():
 			reveal_viewport = _reveal_viewport6
 		if reveal7 || hide7:
 			reveal_viewport = _reveal_viewport7
+		if reveal8 || hide8:
+			reveal_viewport = _reveal_viewport8
+		if reveal9 || hide9:
+			reveal_viewport = _reveal_viewport9
+		if reveal10 || hide10:
+			reveal_viewport = _reveal_viewport10
 		
 		if reveal or hide:
 			var mat = ShaderMaterial.new()
@@ -157,9 +198,11 @@ func _ready():
 			
 			if node.has_method("setup"):
 				node.setup()
+				
+			_world_nodes[node.name] = node
 
 
-func _process(delta):
+func _process(_delta):
 	if _game_state.current != GameState.GAME:
 		return
 		
@@ -175,7 +218,7 @@ func _process(delta):
 		var rot := randf() * TAU
 		
 		for area_group in _area_groups.values():
-			if area_group.active:
+			if area_group.active && area_group.reveal_viewport != null:
 				var splotch: Node2D = _splotch1_scene.instance()
 				splotch.position = pos
 				splotch.rotation = rot
@@ -238,13 +281,16 @@ func _on_GameStateMachine_enter_state():
 			$GameOverlay.visible = true
 			#Effects.shake(Vector2.RIGHT)
 			
-			_farm_level_state.set_state_immediate(FarmLevelState.FARM)
-			_farm_level_state.set_process(true)
+#			_farm_level_state.set_state_immediate(FarmLevelState.FARM)
+#			_farm_level_state.set_process(true)
 			
 			#_farm_level_state.set_state(FarmLevelState.FARM_TRACTOR)
 			
 #			_flower_level_state.set_state_immediate(FlowerLevelState.FLOWER_HILLS)
 #			_flower_level_state.set_process(true)
+
+			_apple_level_state.set_state_immediate(AppleLevelState.APPLE_SMALL_TREE)
+			_apple_level_state.set_process(true)
 
 		_:
 			assert(false, "Unknown game state")
@@ -394,3 +440,114 @@ func _on_FlowerLevel_process_state():
 func _on_FlowerLevel_exit_state():
 	pass
 
+
+
+func _on_AppleLevel_enter_state():
+	match _apple_level_state.current:
+		AppleLevelState.RESET:
+			_apple_level_state.set_state(AppleLevelState.APPLE_SMALL_TREE)
+		
+		AppleLevelState.APPLE_SMALL_TREE:
+			_area_groups[Globals.AREAS_APPLE_SMALL_TREE].activate()
+
+		AppleLevelState.APPLE_MEDIUM_TREE:
+			_world_nodes["AppleTreeSmall"].material_override.set_shader_param("reveal_tex", _reveal_viewport2.get_texture())
+			_world_nodes["AppleTreeSmall"].material_override.set_shader_param("hide", 1.0)
+			
+			_world_nodes["AppleLeavesSmall"].material_override.set_shader_param("reveal_tex", _reveal_viewport2.get_texture())
+			_world_nodes["AppleLeavesSmall"].material_override.set_shader_param("hide", 1.0)
+			
+			_area_groups[Globals.AREAS_APPLE_MEDIUM_TREE].activate()
+		
+		AppleLevelState.APPLE_LARGE_TREE:
+			_world_nodes["AppleTreeMedium"].material_override.set_shader_param("reveal_tex", _reveal_viewport3.get_texture())
+			_world_nodes["AppleTreeMedium"].material_override.set_shader_param("hide", 1.0)
+			
+			_world_nodes["AppleLeavesMedium"].material_override.set_shader_param("reveal_tex", _reveal_viewport3.get_texture())
+			_world_nodes["AppleLeavesMedium"].material_override.set_shader_param("hide", 1.0)
+			
+			_area_groups[Globals.AREAS_APPLE_LARGE_TREE].activate()
+		
+		AppleLevelState.APPLE_FRUITS:
+			_area_groups[Globals.AREAS_APPLE_FRUITS].activate()
+		
+		AppleLevelState.APPLE_PATH:
+			_area_groups[Globals.AREAS_APPLE_PATH].activate()
+			_area_groups[Globals.AREAS_APPLE_NEWTON_WALK1].activate()
+		
+		AppleLevelState.APPLE_NEWTON_SIT:
+			_area_groups[Globals.AREAS_APPLE_NEWTON_SIT].activate()
+			
+		AppleLevelState.APPLE_NEWTON_HEUREKA:
+			_area_groups[Globals.AREAS_APPLE_NEWTON_HEUREKA].activate()
+		
+		AppleLevelState.APPLE_DONE:
+			_apple_level_done_player.play("LevelDone")
+			pass
+
+		_:
+			assert(false, "Unknown game state")
+
+
+func _on_AppleLevel_process_state():	
+	match _apple_level_state.current:			
+		AppleLevelState.APPLE_SMALL_TREE:
+			if _area_groups[Globals.AREAS_APPLE_SMALL_TREE].revealed:
+				_apple_level_state.set_state(AppleLevelState.APPLE_MEDIUM_TREE)
+				_apple_level_state.wait(3.0)
+
+		AppleLevelState.APPLE_MEDIUM_TREE:
+			if _area_groups[Globals.AREAS_APPLE_MEDIUM_TREE].revealed:
+				_apple_level_state.set_state(AppleLevelState.APPLE_LARGE_TREE)
+				_apple_level_state.wait(3.0)
+		
+		AppleLevelState.APPLE_LARGE_TREE:
+			if _area_groups[Globals.AREAS_APPLE_LARGE_TREE].revealed:
+				_apple_level_state.set_state(AppleLevelState.APPLE_FRUITS)
+				_apple_level_state.wait(3.0)
+				
+		AppleLevelState.APPLE_FRUITS:
+			if _area_groups[Globals.AREAS_APPLE_FRUITS].revealed:
+				_apple_level_state.set_state(AppleLevelState.APPLE_PATH)
+		
+		AppleLevelState.APPLE_PATH:
+			if _area_groups[Globals.AREAS_APPLE_NEWTON_WALK1].can_reveal:
+				if !_area_groups[Globals.AREAS_APPLE_NEWTON_WALK2].active:
+					_area_groups[Globals.AREAS_APPLE_NEWTON_WALK2].activate()
+			else:
+				if _area_groups[Globals.AREAS_APPLE_NEWTON_WALK2].active:
+					_area_groups[Globals.AREAS_APPLE_NEWTON_WALK2].deactivate()
+			
+			if _area_groups[Globals.AREAS_APPLE_NEWTON_WALK2].can_reveal:
+				if !_area_groups[Globals.AREAS_APPLE_NEWTON_WALK3].active:
+					_area_groups[Globals.AREAS_APPLE_NEWTON_WALK3].activate()
+			else:
+				if _area_groups[Globals.AREAS_APPLE_NEWTON_WALK3].active:
+					_area_groups[Globals.AREAS_APPLE_NEWTON_WALK3].deactivate()
+			
+			if _area_groups[Globals.AREAS_APPLE_NEWTON_WALK3].can_reveal:
+				if !_area_groups[Globals.AREAS_APPLE_NEWTON_WALK4].active:
+					_area_groups[Globals.AREAS_APPLE_NEWTON_WALK4].activate()
+			else:
+				if _area_groups[Globals.AREAS_APPLE_NEWTON_WALK4].active:
+					_area_groups[Globals.AREAS_APPLE_NEWTON_WALK4].deactivate()
+			
+			if _area_groups[Globals.AREAS_APPLE_NEWTON_WALK4].can_reveal:
+				_apple_level_state.set_state(AppleLevelState.APPLE_NEWTON_SIT)
+				
+		AppleLevelState.APPLE_NEWTON_SIT:
+			if _area_groups[Globals.AREAS_APPLE_NEWTON_SIT].revealed:
+				_apple_level_state.set_state(AppleLevelState.APPLE_NEWTON_HEUREKA)
+				
+		AppleLevelState.APPLE_NEWTON_HEUREKA:
+			if _area_groups[Globals.AREAS_APPLE_NEWTON_HEUREKA].revealed:
+				_apple_level_state.set_state(AppleLevelState.APPLE_DONE)
+		
+		AppleLevelState.APPLE_DONE:
+			pass
+
+		_:
+			assert(false, "Unknown game state")
+
+func _on_AppleLevel_exit_state():
+	pass

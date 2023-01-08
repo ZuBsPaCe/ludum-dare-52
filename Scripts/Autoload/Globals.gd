@@ -27,6 +27,18 @@ const AREAS_FLOWER_SUN := "FlowerSun" #5
 const AREAS_FLOWER_FIELD := "FlowerField" #6
 const AREAS_FLOWER_BEES := "FlowerBees" #7
 
+const AREAS_APPLE_SMALL_TREE := "AppleSmallTree" #1
+const AREAS_APPLE_MEDIUM_TREE := "AppleMediumTree" #2
+const AREAS_APPLE_LARGE_TREE := "AppleLargeTree" #3
+const AREAS_APPLE_FRUITS := "AppleFruits" #4
+const AREAS_APPLE_PATH := "ApplePath" #5
+const AREAS_APPLE_NEWTON_WALK1 := "AppleNewtonWalk1" #6
+const AREAS_APPLE_NEWTON_WALK2 := "AppleNewtonWalk2" #7
+const AREAS_APPLE_NEWTON_WALK3 := "AppleNewtonWalk3" #8
+const AREAS_APPLE_NEWTON_WALK4 := "AppleNewtonWalk4" #9
+const AREAS_APPLE_NEWTON_SIT := "AppleNewtonSit" #10
+const AREAS_APPLE_NEWTON_HEUREKA := "AppleNewtonHeureka" #-
+
 var _center_node: Node2D
 var _settings: Dictionary
 

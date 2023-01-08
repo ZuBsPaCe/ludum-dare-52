@@ -8,7 +8,4 @@ resource_local_to_scene = true
 shader = ExtResource( 1 )
 shader_param/modulate = null
 shader_param/hide = 0.0
-shader_param/layer1 = 0.0
-shader_param/layer2 = 1.0
-shader_param/layer3 = 0.0
 shader_param/tex = ExtResource( 2 )

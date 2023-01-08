@@ -9,9 +9,6 @@ uniform sampler2D reveal_tex: hint_white;
 uniform vec4 modulate;
 uniform float hide = 0.0;
 
-uniform float layer1 = 1.0;
-uniform float layer2 = 0.0;
-uniform float layer3 = 0.0;
 
 void fragment() {
 	//vec2 uv = vec2(UV.x, 1.0 - UV.y);
@@ -22,19 +19,12 @@ void fragment() {
 	
 	//vec4 col = texture(TEXTURE, uv);
 	vec4 reveal = texture(reveal_tex, screen_uv);
-//
-//	col.a = min(reveal.r * layer1 + reveal.g * layer2 + reveal.b * layer3, 1.0);
 
 	vec4 col = texture(tex, uv);
-	//col.rgb = vec3(1.0, 0.0, 0.0);
 	col *= modulate;
 	
-	//col.rgb = lerp(0)
-	//col.rgb *= (1.0 - hide) * reveal.rgb;
 	col.rgb = mix(col.rgb * reveal.rgb, col.rgb, hide);
 	
-	
-	//col.a = min(reveal.r * layer1 + reveal.g * layer2 + reveal.b * layer3, 1.0);
 	col.a = mix(col.a * reveal.a, col.a * (1.0 - reveal.a), hide);
 	
 	ALBEDO = col.rgb;

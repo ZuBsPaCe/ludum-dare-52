@@ -51,7 +51,7 @@ func _process(delta: float):
 			_bee_target_offset[i] = Vector2.RIGHT.rotated(randf() * TAU) * radius * randf()
 		
 		velocity = velocity.move_toward(target_vec, delta * 4.0)
-		velocity = velocity.clamped(_max_speed)
+		velocity = velocity.limit_length(_max_speed)
 		
 		_bee_velocity[i] = velocity
 		

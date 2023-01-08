@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://Sprites/Flowers/CityMoon.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/Flowers/City.png" type="Texture" id=2]
@@ -37,6 +37,19 @@
 [ext_resource path="res://Sprites/Farm/Tractor.png" type="Texture" id=35]
 [ext_resource path="res://Sprites/Farm/Trailer.png" type="Texture" id=36]
 [ext_resource path="res://Scripts/Modulator.gd" type="Script" id=37]
+[ext_resource path="res://Sprites/Apple/MediumTree.png" type="Texture" id=38]
+[ext_resource path="res://Sprites/Apple/SmallTree.png" type="Texture" id=39]
+[ext_resource path="res://Sprites/Apple/SmallTreeLeaves.png" type="Texture" id=40]
+[ext_resource path="res://Sprites/Apple/Background.png" type="Texture" id=41]
+[ext_resource path="res://Sprites/Apple/Hill.png" type="Texture" id=42]
+[ext_resource path="res://Sprites/Apple/Tree.png" type="Texture" id=43]
+[ext_resource path="res://Sprites/Apple/MeadumTreeLeaves.png" type="Texture" id=44]
+[ext_resource path="res://Sprites/Apple/Path.png" type="Texture" id=45]
+[ext_resource path="res://Sprites/Apple/Leaves.png" type="Texture" id=46]
+[ext_resource path="res://Sprites/Apple/Apple.png" type="Texture" id=47]
+[ext_resource path="res://Sprites/Apple/NewtonHead.png" type="Texture" id=48]
+[ext_resource path="res://Sprites/Apple/NewtonSit.png" type="Texture" id=49]
+[ext_resource path="res://Sprites/Apple/NewtonWalk.png" type="Texture" id=50]
 
 [sub_resource type="Animation" id=1]
 resource_name = "LevelDone"
@@ -514,6 +527,158 @@ tracks/9/keys = {
 "values": [ Vector3( 0, 0, 30 ) ]
 }
 
+[sub_resource type="Animation" id=8]
+resource_name = "LevelDone"
+length = 4.0
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath("AppleFruit1Pivot:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3, 0.5, 0.7, 0.9, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 35 ), Vector3( 0, 0, -35 ), Vector3( 0, 0, 35 ), Vector3( 0, 0, -35 ), Vector3( 0, 0, 35 ), Vector3( 0, 0, 114.04 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AppleFruit1Pivot:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.9, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1.35833, 1.78438, 3.25 ), Vector3( 1.35833, 1.78438, 3.25 ), Vector3( 1.35833, -0.394251, 3.25 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("NewtonHead:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5, 0.9, 1.6, 3.35, 3.55, 3.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, -10 ), Vector3( 0, 0, 49.8 ), Vector3( 0, 0, 49.8 ), Vector3( 0, 0, -2.788 ), Vector3( 0, 0, -2.788 ), Vector3( 0, 0, -20 ), Vector3( 0, 0, -3.103 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AppleFruit8:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 2.75, 3.35, 3.575, 3.8, 4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( -0.014, 3.361, 2.75 ), Vector3( -0.014, 3.361, 2.75 ), Vector3( -0.014, 0.742032, 2.75 ), Vector3( 0.505125, 0.843577, 2.75 ), Vector3( 0.990242, 0.287671, 2.75 ), Vector3( 1.15338, -0.601222, 2.75 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AppleFruit8:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 2.75, 3.35, 3.575, 3.8, 4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, -31.461 ), Vector3( 0, 0, -60 ), Vector3( 0, 0, -80 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("NewtonHead:translation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 3.35, 3.55, 3.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( -0.18, 0.5, 3 ), Vector3( -0.18, 0.5, 3 ), Vector3( -0.18, 0.45, 3 ), Vector3( -0.18, 0.5, 3 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AppleFruit1Pivot:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AppleFruit1Pivot:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1.35833, 1.78438, 3.25 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("NewtonHead:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, -10 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AppleFruit8:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -0.014, 3.361, 2.75 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AppleFruit8:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("NewtonHead:translation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -0.18, 0.5, 3 ) ]
+}
+
 [node name="World" type="Spatial"]
 
 [node name="Camera" type="Camera" parent="."]
@@ -623,6 +788,7 @@ anims/LevelDone = SubResource( 1 )
 anims/RESET = SubResource( 2 )
 
 [node name="Farm" type="Spatial" parent="."]
+visible = false
 
 [node name="FarmBackground" type="Sprite3D" parent="Farm"]
 transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1, 0, 0, 0 )
@@ -760,3 +926,127 @@ texture = ExtResource( 33 )
 [node name="FarmLevelDonePlayer" type="AnimationPlayer" parent="Farm"]
 anims/LevelDone = SubResource( 6 )
 anims/RESET = SubResource( 7 )
+
+[node name="Apple" type="Spatial" parent="."]
+
+[node name="AppleBackground" type="Sprite3D" parent="Apple"]
+transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1, 0, 0, 0 )
+alpha_cut = 2
+texture = ExtResource( 41 )
+
+[node name="AppleHill" type="Sprite3D" parent="Apple"]
+transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1, 0, -4.2, 1 )
+alpha_cut = 2
+texture = ExtResource( 42 )
+
+[node name="ApplePath" type="Sprite3D" parent="Apple" groups=["Reveal5"]]
+transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1, 2, -3, 1.2 )
+alpha_cut = 2
+texture = ExtResource( 45 )
+
+[node name="AppleTreeLarge" type="Sprite3D" parent="Apple" groups=["Reveal3"]]
+transform = Transform( 1.1, 0, 0, 0, 1.1, 0, 0, 0, 1, -0.25, 2.1, 2.5 )
+alpha_cut = 2
+texture = ExtResource( 43 )
+
+[node name="AppleLeavesLarge" type="Sprite3D" parent="Apple" groups=["Reveal3"]]
+transform = Transform( 1.1, 0, 0, 0, 1.1, 0, 0, 0, 1, -0.4, 3.3, 3 )
+alpha_cut = 2
+texture = ExtResource( 46 )
+
+[node name="AppleTreeMedium" type="Sprite3D" parent="Apple" groups=["Reveal2"]]
+transform = Transform( 1.1, 0, 0, 0, 1.1, 0, 0, 0, 1, -0.5, 1, 2.5 )
+alpha_cut = 2
+texture = ExtResource( 38 )
+
+[node name="AppleLeavesMedium" type="Sprite3D" parent="Apple" groups=["Reveal2"]]
+transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1, -0.5, 1.8, 3 )
+alpha_cut = 2
+texture = ExtResource( 44 )
+
+[node name="AppleTreeSmall" type="Sprite3D" parent="Apple" groups=["Reveal1"]]
+transform = Transform( 1.1, 0, 0, 0, 1.1, 0, 0, 0, 1, -0.3, 0.2, 2.5 )
+alpha_cut = 2
+texture = ExtResource( 39 )
+
+[node name="AppleLeavesSmall" type="Sprite3D" parent="Apple" groups=["Reveal1"]]
+transform = Transform( 1.1, 0, 0, 0, 1.1, 0, 0, 0, 1, -0.31, 0.48, 3 )
+alpha_cut = 2
+texture = ExtResource( 40 )
+
+[node name="AppleFruit1Pivot" type="Spatial" parent="Apple" groups=["Reveal4"]]
+transform = Transform( 1.1, 0, 0, 0, 1.1, 0, 0, 0, 1, 1.35833, 1.78438, 3.25 )
+
+[node name="AppleFruit1" type="Sprite3D" parent="Apple/AppleFruit1Pivot" groups=["Reveal4"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.112865, 0 )
+alpha_cut = 2
+texture = ExtResource( 47 )
+
+[node name="AppleFruit2" type="Sprite3D" parent="Apple" groups=["Reveal4"]]
+transform = Transform( 1.1, 0, 0, 0, 1.1, 0, 0, 0, 1, -2.34786, 1.87159, 3.25 )
+alpha_cut = 2
+texture = ExtResource( 47 )
+
+[node name="AppleFruit3" type="Sprite3D" parent="Apple" groups=["Reveal4"]]
+transform = Transform( 1.1, 0, 0, 0, 1.1, 0, 0, 0, 1, -1.33539, 3.05095, 3.25 )
+alpha_cut = 2
+texture = ExtResource( 47 )
+
+[node name="AppleFruit4" type="Sprite3D" parent="Apple" groups=["Reveal4"]]
+transform = Transform( 1.1, 0, 0, 0, 1.1, 0, 0, 0, 1, -2.74275, 3.53871, 2.75 )
+alpha_cut = 2
+texture = ExtResource( 47 )
+
+[node name="AppleFruit5" type="Sprite3D" parent="Apple" groups=["Reveal4"]]
+transform = Transform( 1.1, 0, 0, 0, 1.1, 0, 0, 0, 1, -0.477158, 4.26839, 3.25 )
+alpha_cut = 2
+texture = ExtResource( 47 )
+
+[node name="AppleFruit6" type="Sprite3D" parent="Apple" groups=["Reveal4"]]
+transform = Transform( 1.1, 0, 0, 0, 1.1, 0, 0, 0, 1, 1.08202, 4.26839, 3.25 )
+alpha_cut = 2
+texture = ExtResource( 47 )
+
+[node name="AppleFruit7" type="Sprite3D" parent="Apple" groups=["Reveal4"]]
+transform = Transform( 1.1, 0, 0, 0, 1.1, 0, 0, 0, 1, 1.87059, 3.28725, 3.25 )
+alpha_cut = 2
+texture = ExtResource( 47 )
+
+[node name="AppleFruit8" type="Sprite3D" parent="Apple" groups=["Reveal4"]]
+transform = Transform( 1.1, 0, 0, 0, 1.1, 0, 0, 0, 1, -0.014, 3.361, 2.75 )
+alpha_cut = 2
+texture = ExtResource( 47 )
+
+[node name="NewtonWalk1" type="Sprite3D" parent="Apple" groups=["Reveal6"]]
+transform = Transform( 1.1, 0, 0, 0, 1.1, 0, 0, 0, 1, 9.10072, -4.53692, 2.75 )
+alpha_cut = 2
+texture = ExtResource( 50 )
+
+[node name="NewtonWalk2" type="Sprite3D" parent="Apple" groups=["Reveal7"]]
+transform = Transform( -1.1, 0, 0, 0, 1.1, 0, 0, 0, 1, -5.08205, -3.19663, 2.75 )
+alpha_cut = 2
+texture = ExtResource( 50 )
+
+[node name="NewtonWalk3" type="Sprite3D" parent="Apple" groups=["Reveal8"]]
+transform = Transform( 1.1, 0, 0, 0, 1.1, 0, 0, 0, 1, 4.77572, -2.48249, 2.75 )
+alpha_cut = 2
+texture = ExtResource( 50 )
+
+[node name="NewtonWalk4" type="Sprite3D" parent="Apple" groups=["Reveal9"]]
+transform = Transform( -1.1, 0, 0, 0, 1.1, 0, 0, 0, 1, -3.19185, -1.30474, 2.75 )
+alpha_cut = 2
+texture = ExtResource( 50 )
+
+[node name="NewtonSit" type="Sprite3D" parent="Apple" groups=["Reveal10"]]
+transform = Transform( 1.1, 0, 0, 0, 1.1, 0, 0, 0, 1, 0.088254, -0.0953143, 3 )
+alpha_cut = 2
+texture = ExtResource( 49 )
+
+[node name="NewtonHead" type="Sprite3D" parent="Apple" groups=["Reveal10"]]
+transform = Transform( 1.08329, 0.191013, 0, -0.191013, 1.08329, 0, 0, 0, 1, -0.18, 0.5, 3 )
+alpha_cut = 2
+texture = ExtResource( 48 )
+
+[node name="AppleLevelDonePlayer" type="AnimationPlayer" parent="Apple"]
+anims/LevelDone = SubResource( 8 )
+anims/RESET = SubResource( 9 )

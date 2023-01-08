@@ -7,8 +7,10 @@ var active := false
 var revealed := false
 var can_reveal := false
 
+
 export var _reveal_viewport_path : NodePath
 export var _auto_reveal := true
+export var _no_viewport := false
 
 
 var reveal_viewport: Viewport
@@ -16,8 +18,10 @@ var reveal_viewport: Viewport
 var _check_cooldown := Cooldown.new()
 
 func _ready():
-	assert(!_reveal_viewport_path.is_empty())
-	reveal_viewport = get_node(_reveal_viewport_path)
+	assert(_no_viewport || !_reveal_viewport_path.is_empty())
+	
+	if !_no_viewport:
+		reveal_viewport = get_node(_reveal_viewport_path)
 	
 	for area in get_children():
 		var cooldown := Cooldown.new()
@@ -38,17 +42,34 @@ func activate():
 	print("Activated %s" % name)
 	
 	active = true
-	_check_cooldown.restart()
 	
-	for area in areas:
-		area.monitoring = true
-		area.monitorable = true
+	if areas.size() > 0:
+		_check_cooldown.restart()
+		
+		for area in areas:
+			area.monitoring = true
+			area.monitorable = true
+		
+		set_process(true)
+		
+		
+func deactivate():
+	print("Deactivated %s" % name)
 	
-	set_process(true)
+	active = false
+	
+	if areas.size() > 0:
+		_check_cooldown.restart()
+		
+		for area in areas:
+			area.monitoring = false
+			area.monitorable = false
+		
+		set_process(false)
 	
 	
 func hide():
-	print("Deactivated %s" % name)
+	print("Hide %s" % name)
 	
 	active = false
 	
@@ -65,7 +86,7 @@ func reveal():
 	assert(!revealed)
 	_finish()
 	
-func _process(delta):
+func _process(_delta):
 	assert(active)
 	
 	if _check_cooldown.done:
@@ -75,7 +96,7 @@ func _process(delta):
 		for cooldown in cooldowns:
 			if !cooldown.done:
 				done_count += 1
-			
+		
 		var done_percent := float(done_count) / float(cooldowns.size()) * 100.0
 		#print("Done %s: %s" % [name, done_percent])
 		
@@ -91,7 +112,8 @@ func _finish():
 	revealed = true
 	can_reveal = false
 	
-	reveal_viewport.reveal()
+	if !_no_viewport:
+		reveal_viewport.reveal()
 			
 	for area in areas:
 		area.monitoring = false
