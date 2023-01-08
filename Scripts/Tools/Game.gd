@@ -4,7 +4,7 @@ extends Node2D
 const GameState := preload("res://Scripts/GameState.gd").GameState
 
 enum Level {
-	FARM,
+	FARM = 1,
 	FLOWER,
 	APPLE,
 	TIMBER
@@ -325,6 +325,8 @@ func _on_GameStateMachine_enter_state():
 		GameState.MAIN_MENU:
 			_stop_level()
 			
+			_farm_node.visible = true
+			
 			get_tree().paused = true
 			
 			$MainMenu.visible = true
@@ -338,7 +340,7 @@ func _on_GameStateMachine_enter_state():
 		GameState.START:
 			$MainMenu.visible = false
 			
-			_start_level(Level.FARM)
+			_start_level(Level.TIMBER)
 			
 			switch_game_state(GameState.GAME)
 

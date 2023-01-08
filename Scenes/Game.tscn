@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Scripts/Tools/Game.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Tools/CameraShake.gd" type="Script" id=2]
@@ -9,6 +9,11 @@
 [ext_resource path="res://Sprites/Helpers/White-1920x1080.png" type="Texture" id=7]
 [ext_resource path="res://Scripts/RevealViewport.gd" type="Script" id=8]
 [ext_resource path="res://Scripts/AreaGroup.gd" type="Script" id=9]
+[ext_resource path="res://Sprites/Menu/Level1.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Menu/Level2.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/Menu/Level3.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/Menu/Level4.png" type="Texture" id=13]
+[ext_resource path="res://Scripts/LevelTitle.gd" type="Script" id=14]
 [ext_resource path="res://Scenes/Splotch1.tscn" type="PackedScene" id=17]
 
 [sub_resource type="CircleShape2D" id=2]
@@ -23,9 +28,10 @@ radius = 100.0
 [sub_resource type="Environment" id=1]
 background_mode = 4
 background_canvas_max_layer = 1
+glow_enabled = true
 glow_levels/4 = true
-glow_intensity = 5.06
-glow_strength = 1.42
+glow_intensity = 1.55
+glow_strength = 1.35
 glow_blend_mode = 1
 glow_bicubic_upscale = true
 glow_high_quality = true
@@ -49,6 +55,42 @@ script = ExtResource( 4 )
 
 [node name="TimberLevelStateMachine" type="Node" parent="."]
 script = ExtResource( 4 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource( 14 )
+
+[node name="White" type="TextureRect" parent="CanvasLayer"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Level1" type="TextureRect" parent="CanvasLayer"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource( 10 )
+
+[node name="Level2" type="TextureRect" parent="CanvasLayer"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource( 11 )
+
+[node name="Level3" type="TextureRect" parent="CanvasLayer"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource( 12 )
+
+[node name="Level4" type="TextureRect" parent="CanvasLayer"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource( 13 )
 
 [node name="MainMenu" parent="." instance=ExtResource( 3 )]
 
@@ -1288,6 +1330,7 @@ collision_layer = 0
 shape = SubResource( 2 )
 
 [node name="TimberFire" type="Node2D" parent="RevealAreas"]
+visible = false
 script = ExtResource( 9 )
 _no_viewport = true
 
