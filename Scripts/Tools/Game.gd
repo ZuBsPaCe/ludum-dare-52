@@ -764,6 +764,10 @@ func _on_AppleLevel_exit_state():
 func _on_TimberLevel_enter_state():
 	match _timber_level_state.current:
 		TimberLevelState.RESET:
+			_timber_level_woodcut_player.stop()
+			# Fix stupid animation player not reseting a few properties...
+			$Levels/BackgroundContainer/Viewport/World/Timber/FireParticles.emitting = false
+			$Levels/BackgroundContainer/Viewport/World/Timber/LargeTreePivot.rotation_degrees = Vector3(0.0, 0.0, 0.0)
 			_timber_level_state.set_state_immediate(TimberLevelState.TIMBER_SNOW)
 		
 		TimberLevelState.TIMBER_SNOW:
@@ -785,7 +789,7 @@ func _on_TimberLevel_enter_state():
 			_area_groups[Globals.AREAS_TIMBER_WOODCUT].activate()
 			
 		TimberLevelState.TIMBER_FIRE:
-			$LevelStepMusic.play()
+#			$LevelStepMusic.play()
 			_area_groups[Globals.AREAS_TIMBER_FIRE].activate()
 
 		TimberLevelState.TIMBER_DONE:
@@ -817,6 +821,7 @@ func _on_TimberLevel_process_state():
 				
 		TimberLevelState.TIMBER_WOODCUT:
 			if _area_groups[Globals.AREAS_TIMBER_WOODCUT].revealed:
+				$LevelStepMusic.play()
 				_timber_level_woodcut_player.play("Woodcut")
 				_timber_level_state.set_state(TimberLevelState.TIMBER_FIRE)
 				_timber_level_state.wait(10.0)
