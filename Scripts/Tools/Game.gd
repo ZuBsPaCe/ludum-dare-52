@@ -257,8 +257,8 @@ func _ready():
 	_timber_node.visible = false
 
 
-
 func _process(_delta):
+
 	if _game_state.current != GameState.GAME:
 		return
 		

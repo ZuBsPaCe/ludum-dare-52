@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Scripts/Tools/Game.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Tools/CameraShake.gd" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Music/Music1.mp3" type="AudioStream" id=11]
 [ext_resource path="res://Music/LevelStartSound.mp3" type="AudioStream" id=12]
 [ext_resource path="res://Music/LevelStepMusic.mp3" type="AudioStream" id=13]
+[ext_resource path="res://Music/LevelEndMusic.mp3" type="AudioStream" id=14]
 [ext_resource path="res://Scenes/Splotch1.tscn" type="PackedScene" id=17]
 
 [sub_resource type="CircleShape2D" id=2]
@@ -52,7 +53,7 @@ bus = "Sounds"
 
 [node name="LevelEndMusic" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
-stream = ExtResource( 12 )
+stream = ExtResource( 14 )
 bus = "Sounds"
 
 [node name="LevelStepMusic" type="AudioStreamPlayer" parent="."]
