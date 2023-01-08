@@ -2,21 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/NewtonHead.png-adbc18a1a298e6d6971793080a8b1d53.s3tc.stex"
-path.etc="res://.import/NewtonHead.png-adbc18a1a298e6d6971793080a8b1d53.etc.stex"
+path="res://.import/NewtonHead.png-adbc18a1a298e6d6971793080a8b1d53.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Sprites/Apple/NewtonHead.png"
-dest_files=[ "res://.import/NewtonHead.png-adbc18a1a298e6d6971793080a8b1d53.s3tc.stex", "res://.import/NewtonHead.png-adbc18a1a298e6d6971793080a8b1d53.etc.stex" ]
+dest_files=[ "res://.import/NewtonHead.png-adbc18a1a298e6d6971793080a8b1d53.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

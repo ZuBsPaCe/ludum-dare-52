@@ -2,21 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/Black-1920x1080.png-c6b4db80617b7da62da819aa6680316f.s3tc.stex"
-path.etc="res://.import/Black-1920x1080.png-c6b4db80617b7da62da819aa6680316f.etc.stex"
+path="res://.import/Black-1920x1080.png-c6b4db80617b7da62da819aa6680316f.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Sprites/Helpers/Black-1920x1080.png"
-dest_files=[ "res://.import/Black-1920x1080.png-c6b4db80617b7da62da819aa6680316f.s3tc.stex", "res://.import/Black-1920x1080.png-c6b4db80617b7da62da819aa6680316f.etc.stex" ]
+dest_files=[ "res://.import/Black-1920x1080.png-c6b4db80617b7da62da819aa6680316f.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

@@ -2,21 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/NatureBeehive.png-f6e3f734ab510f406fd431e79ea14596.s3tc.stex"
-path.etc="res://.import/NatureBeehive.png-f6e3f734ab510f406fd431e79ea14596.etc.stex"
+path="res://.import/NatureBeehive.png-f6e3f734ab510f406fd431e79ea14596.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Sprites/Flowers/NatureBeehive.png"
-dest_files=[ "res://.import/NatureBeehive.png-f6e3f734ab510f406fd431e79ea14596.s3tc.stex", "res://.import/NatureBeehive.png-f6e3f734ab510f406fd431e79ea14596.etc.stex" ]
+dest_files=[ "res://.import/NatureBeehive.png-f6e3f734ab510f406fd431e79ea14596.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

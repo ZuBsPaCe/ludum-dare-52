@@ -2,21 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/FarmHill.png-31e7e66c6c994d537465af1e20a1f3ff.s3tc.stex"
-path.etc="res://.import/FarmHill.png-31e7e66c6c994d537465af1e20a1f3ff.etc.stex"
+path="res://.import/FarmHill.png-31e7e66c6c994d537465af1e20a1f3ff.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Sprites/Farm/FarmHill.png"
-dest_files=[ "res://.import/FarmHill.png-31e7e66c6c994d537465af1e20a1f3ff.s3tc.stex", "res://.import/FarmHill.png-31e7e66c6c994d537465af1e20a1f3ff.etc.stex" ]
+dest_files=[ "res://.import/FarmHill.png-31e7e66c6c994d537465af1e20a1f3ff.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

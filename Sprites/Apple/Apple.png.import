@@ -2,21 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/Apple.png-ee8efa9a0747b55efb881d5997a64dae.s3tc.stex"
-path.etc="res://.import/Apple.png-ee8efa9a0747b55efb881d5997a64dae.etc.stex"
+path="res://.import/Apple.png-ee8efa9a0747b55efb881d5997a64dae.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Sprites/Apple/Apple.png"
-dest_files=[ "res://.import/Apple.png-ee8efa9a0747b55efb881d5997a64dae.s3tc.stex", "res://.import/Apple.png-ee8efa9a0747b55efb881d5997a64dae.etc.stex" ]
+dest_files=[ "res://.import/Apple.png-ee8efa9a0747b55efb881d5997a64dae.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

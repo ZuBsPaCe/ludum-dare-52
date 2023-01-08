@@ -2,21 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/CornHill.png-b534491fdd7234e0d6a090a5c1e0ed39.s3tc.stex"
-path.etc="res://.import/CornHill.png-b534491fdd7234e0d6a090a5c1e0ed39.etc.stex"
+path="res://.import/CornHill.png-b534491fdd7234e0d6a090a5c1e0ed39.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Sprites/Farm/CornHill.png"
-dest_files=[ "res://.import/CornHill.png-b534491fdd7234e0d6a090a5c1e0ed39.s3tc.stex", "res://.import/CornHill.png-b534491fdd7234e0d6a090a5c1e0ed39.etc.stex" ]
+dest_files=[ "res://.import/CornHill.png-b534491fdd7234e0d6a090a5c1e0ed39.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

@@ -2,21 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/White-1920x1080.png-a8ad47d86d30b57c31d63ba055be7705.s3tc.stex"
-path.etc="res://.import/White-1920x1080.png-a8ad47d86d30b57c31d63ba055be7705.etc.stex"
+path="res://.import/White-1920x1080.png-a8ad47d86d30b57c31d63ba055be7705.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Sprites/Helpers/White-1920x1080.png"
-dest_files=[ "res://.import/White-1920x1080.png-a8ad47d86d30b57c31d63ba055be7705.s3tc.stex", "res://.import/White-1920x1080.png-a8ad47d86d30b57c31d63ba055be7705.etc.stex" ]
+dest_files=[ "res://.import/White-1920x1080.png-a8ad47d86d30b57c31d63ba055be7705.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

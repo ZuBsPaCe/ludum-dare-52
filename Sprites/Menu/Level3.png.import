@@ -2,21 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/Level3.png-26ab7cba3384f7cd7a2da0d82c915f14.s3tc.stex"
-path.etc="res://.import/Level3.png-26ab7cba3384f7cd7a2da0d82c915f14.etc.stex"
+path="res://.import/Level3.png-26ab7cba3384f7cd7a2da0d82c915f14.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Sprites/Menu/Level3.png"
-dest_files=[ "res://.import/Level3.png-26ab7cba3384f7cd7a2da0d82c915f14.s3tc.stex", "res://.import/Level3.png-26ab7cba3384f7cd7a2da0d82c915f14.etc.stex" ]
+dest_files=[ "res://.import/Level3.png-26ab7cba3384f7cd7a2da0d82c915f14.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

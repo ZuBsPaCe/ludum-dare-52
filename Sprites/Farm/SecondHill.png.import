@@ -2,21 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/SecondHill.png-d3381f7f54ef2946a328b1107d2dc41a.s3tc.stex"
-path.etc="res://.import/SecondHill.png-d3381f7f54ef2946a328b1107d2dc41a.etc.stex"
+path="res://.import/SecondHill.png-d3381f7f54ef2946a328b1107d2dc41a.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Sprites/Farm/SecondHill.png"
-dest_files=[ "res://.import/SecondHill.png-d3381f7f54ef2946a328b1107d2dc41a.s3tc.stex", "res://.import/SecondHill.png-d3381f7f54ef2946a328b1107d2dc41a.etc.stex" ]
+dest_files=[ "res://.import/SecondHill.png-d3381f7f54ef2946a328b1107d2dc41a.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

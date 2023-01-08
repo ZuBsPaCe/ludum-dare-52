@@ -2,21 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/House.png-a59ee3650661fd1ceb1a0267ffe4fb8f.s3tc.stex"
-path.etc="res://.import/House.png-a59ee3650661fd1ceb1a0267ffe4fb8f.etc.stex"
+path="res://.import/House.png-a59ee3650661fd1ceb1a0267ffe4fb8f.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Sprites/Timber/House.png"
-dest_files=[ "res://.import/House.png-a59ee3650661fd1ceb1a0267ffe4fb8f.s3tc.stex", "res://.import/House.png-a59ee3650661fd1ceb1a0267ffe4fb8f.etc.stex" ]
+dest_files=[ "res://.import/House.png-a59ee3650661fd1ceb1a0267ffe4fb8f.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

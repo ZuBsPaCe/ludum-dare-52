@@ -2,21 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/Background.png-e4e794ad9c9c094e90597fea8dab1b4f.s3tc.stex"
-path.etc="res://.import/Background.png-e4e794ad9c9c094e90597fea8dab1b4f.etc.stex"
+path="res://.import/Background.png-e4e794ad9c9c094e90597fea8dab1b4f.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Sprites/Farm/Background.png"
-dest_files=[ "res://.import/Background.png-e4e794ad9c9c094e90597fea8dab1b4f.s3tc.stex", "res://.import/Background.png-e4e794ad9c9c094e90597fea8dab1b4f.etc.stex" ]
+dest_files=[ "res://.import/Background.png-e4e794ad9c9c094e90597fea8dab1b4f.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

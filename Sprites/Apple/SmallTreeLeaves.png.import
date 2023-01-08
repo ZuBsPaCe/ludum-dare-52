@@ -2,21 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/SmallTreeLeaves.png-b900c597789ee70ba4fa55a4314e4b0a.s3tc.stex"
-path.etc="res://.import/SmallTreeLeaves.png-b900c597789ee70ba4fa55a4314e4b0a.etc.stex"
+path="res://.import/SmallTreeLeaves.png-b900c597789ee70ba4fa55a4314e4b0a.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Sprites/Apple/SmallTreeLeaves.png"
-dest_files=[ "res://.import/SmallTreeLeaves.png-b900c597789ee70ba4fa55a4314e4b0a.s3tc.stex", "res://.import/SmallTreeLeaves.png-b900c597789ee70ba4fa55a4314e4b0a.etc.stex" ]
+dest_files=[ "res://.import/SmallTreeLeaves.png-b900c597789ee70ba4fa55a4314e4b0a.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

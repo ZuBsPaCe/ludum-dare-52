@@ -2,21 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/NatureBackground.png-e20b275a0642d90d3f956950c11e9a5d.s3tc.stex"
-path.etc="res://.import/NatureBackground.png-e20b275a0642d90d3f956950c11e9a5d.etc.stex"
+path="res://.import/NatureBackground.png-e20b275a0642d90d3f956950c11e9a5d.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Sprites/Flowers/NatureBackground.png"
-dest_files=[ "res://.import/NatureBackground.png-e20b275a0642d90d3f956950c11e9a5d.s3tc.stex", "res://.import/NatureBackground.png-e20b275a0642d90d3f956950c11e9a5d.etc.stex" ]
+dest_files=[ "res://.import/NatureBackground.png-e20b275a0642d90d3f956950c11e9a5d.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

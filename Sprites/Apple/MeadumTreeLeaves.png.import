@@ -2,21 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/MeadumTreeLeaves.png-e7fe21cbc93b460d8b9d2092d2f98fa2.s3tc.stex"
-path.etc="res://.import/MeadumTreeLeaves.png-e7fe21cbc93b460d8b9d2092d2f98fa2.etc.stex"
+path="res://.import/MeadumTreeLeaves.png-e7fe21cbc93b460d8b9d2092d2f98fa2.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Sprites/Apple/MeadumTreeLeaves.png"
-dest_files=[ "res://.import/MeadumTreeLeaves.png-e7fe21cbc93b460d8b9d2092d2f98fa2.s3tc.stex", "res://.import/MeadumTreeLeaves.png-e7fe21cbc93b460d8b9d2092d2f98fa2.etc.stex" ]
+dest_files=[ "res://.import/MeadumTreeLeaves.png-e7fe21cbc93b460d8b9d2092d2f98fa2.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

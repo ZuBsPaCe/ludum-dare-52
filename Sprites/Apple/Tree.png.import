@@ -2,21 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/Tree.png-fe8b8d3b959f3662479678ff4466cb5e.s3tc.stex"
-path.etc="res://.import/Tree.png-fe8b8d3b959f3662479678ff4466cb5e.etc.stex"
+path="res://.import/Tree.png-fe8b8d3b959f3662479678ff4466cb5e.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Sprites/Apple/Tree.png"
-dest_files=[ "res://.import/Tree.png-fe8b8d3b959f3662479678ff4466cb5e.s3tc.stex", "res://.import/Tree.png-fe8b8d3b959f3662479678ff4466cb5e.etc.stex" ]
+dest_files=[ "res://.import/Tree.png-fe8b8d3b959f3662479678ff4466cb5e.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

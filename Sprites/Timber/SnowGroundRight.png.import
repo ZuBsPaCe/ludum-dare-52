@@ -2,21 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/SnowGroundRight.png-12d8909ca303c927c4a23361fc673477.s3tc.stex"
-path.etc="res://.import/SnowGroundRight.png-12d8909ca303c927c4a23361fc673477.etc.stex"
+path="res://.import/SnowGroundRight.png-12d8909ca303c927c4a23361fc673477.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Sprites/Timber/SnowGroundRight.png"
-dest_files=[ "res://.import/SnowGroundRight.png-12d8909ca303c927c4a23361fc673477.s3tc.stex", "res://.import/SnowGroundRight.png-12d8909ca303c927c4a23361fc673477.etc.stex" ]
+dest_files=[ "res://.import/SnowGroundRight.png-12d8909ca303c927c4a23361fc673477.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

@@ -2,21 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/NewtonSit.png-2875428b325de9f8502cd7b31f5c9e47.s3tc.stex"
-path.etc="res://.import/NewtonSit.png-2875428b325de9f8502cd7b31f5c9e47.etc.stex"
+path="res://.import/NewtonSit.png-2875428b325de9f8502cd7b31f5c9e47.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Sprites/Apple/NewtonSit.png"
-dest_files=[ "res://.import/NewtonSit.png-2875428b325de9f8502cd7b31f5c9e47.s3tc.stex", "res://.import/NewtonSit.png-2875428b325de9f8502cd7b31f5c9e47.etc.stex" ]
+dest_files=[ "res://.import/NewtonSit.png-2875428b325de9f8502cd7b31f5c9e47.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

@@ -2,21 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/CityStreet.png-ca835cbc2417eda602f2dc300cb45eca.s3tc.stex"
-path.etc="res://.import/CityStreet.png-ca835cbc2417eda602f2dc300cb45eca.etc.stex"
+path="res://.import/CityStreet.png-ca835cbc2417eda602f2dc300cb45eca.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Sprites/Flowers/CityStreet.png"
-dest_files=[ "res://.import/CityStreet.png-ca835cbc2417eda602f2dc300cb45eca.s3tc.stex", "res://.import/CityStreet.png-ca835cbc2417eda602f2dc300cb45eca.etc.stex" ]
+dest_files=[ "res://.import/CityStreet.png-ca835cbc2417eda602f2dc300cb45eca.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

@@ -2,21 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/Mountain3.png-400a7982d77a295ba3fa4051541eca8d.s3tc.stex"
-path.etc="res://.import/Mountain3.png-400a7982d77a295ba3fa4051541eca8d.etc.stex"
+path="res://.import/Mountain3.png-400a7982d77a295ba3fa4051541eca8d.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Sprites/Timber/Mountain3.png"
-dest_files=[ "res://.import/Mountain3.png-400a7982d77a295ba3fa4051541eca8d.s3tc.stex", "res://.import/Mountain3.png-400a7982d77a295ba3fa4051541eca8d.etc.stex" ]
+dest_files=[ "res://.import/Mountain3.png-400a7982d77a295ba3fa4051541eca8d.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

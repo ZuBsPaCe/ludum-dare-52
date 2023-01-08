@@ -2,21 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/Snow2Left.png-31937e665d40d03e0d6dc4d7f39f1c12.s3tc.stex"
-path.etc="res://.import/Snow2Left.png-31937e665d40d03e0d6dc4d7f39f1c12.etc.stex"
+path="res://.import/Snow2Left.png-31937e665d40d03e0d6dc4d7f39f1c12.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Sprites/Timber/Snow2Left.png"
-dest_files=[ "res://.import/Snow2Left.png-31937e665d40d03e0d6dc4d7f39f1c12.s3tc.stex", "res://.import/Snow2Left.png-31937e665d40d03e0d6dc4d7f39f1c12.etc.stex" ]
+dest_files=[ "res://.import/Snow2Left.png-31937e665d40d03e0d6dc4d7f39f1c12.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

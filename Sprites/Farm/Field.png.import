@@ -2,21 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/Field.png-002e0ec9379728abd52948f5e809592d.s3tc.stex"
-path.etc="res://.import/Field.png-002e0ec9379728abd52948f5e809592d.etc.stex"
+path="res://.import/Field.png-002e0ec9379728abd52948f5e809592d.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Sprites/Farm/Field.png"
-dest_files=[ "res://.import/Field.png-002e0ec9379728abd52948f5e809592d.s3tc.stex", "res://.import/Field.png-002e0ec9379728abd52948f5e809592d.etc.stex" ]
+dest_files=[ "res://.import/Field.png-002e0ec9379728abd52948f5e809592d.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

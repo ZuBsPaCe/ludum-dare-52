@@ -2,21 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/Clouds.png-edf96a8ada1a1b9963273d1bcbb58b60.s3tc.stex"
-path.etc="res://.import/Clouds.png-edf96a8ada1a1b9963273d1bcbb58b60.etc.stex"
+path="res://.import/Clouds.png-edf96a8ada1a1b9963273d1bcbb58b60.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Sprites/Farm/Clouds.png"
-dest_files=[ "res://.import/Clouds.png-edf96a8ada1a1b9963273d1bcbb58b60.s3tc.stex", "res://.import/Clouds.png-edf96a8ada1a1b9963273d1bcbb58b60.etc.stex" ]
+dest_files=[ "res://.import/Clouds.png-edf96a8ada1a1b9963273d1bcbb58b60.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

@@ -2,21 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/Tractor.png-cfe77269cc57e1944af24f30b1684da7.s3tc.stex"
-path.etc="res://.import/Tractor.png-cfe77269cc57e1944af24f30b1684da7.etc.stex"
+path="res://.import/Tractor.png-cfe77269cc57e1944af24f30b1684da7.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Sprites/Farm/Tractor.png"
-dest_files=[ "res://.import/Tractor.png-cfe77269cc57e1944af24f30b1684da7.s3tc.stex", "res://.import/Tractor.png-cfe77269cc57e1944af24f30b1684da7.etc.stex" ]
+dest_files=[ "res://.import/Tractor.png-cfe77269cc57e1944af24f30b1684da7.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

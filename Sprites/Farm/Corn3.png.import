@@ -2,21 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/Corn3.png-ba7235bfe7b0366d89cf89cd43270da4.s3tc.stex"
-path.etc="res://.import/Corn3.png-ba7235bfe7b0366d89cf89cd43270da4.etc.stex"
+path="res://.import/Corn3.png-ba7235bfe7b0366d89cf89cd43270da4.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Sprites/Farm/Corn3.png"
-dest_files=[ "res://.import/Corn3.png-ba7235bfe7b0366d89cf89cd43270da4.s3tc.stex", "res://.import/Corn3.png-ba7235bfe7b0366d89cf89cd43270da4.etc.stex" ]
+dest_files=[ "res://.import/Corn3.png-ba7235bfe7b0366d89cf89cd43270da4.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

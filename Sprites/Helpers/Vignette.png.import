@@ -2,21 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/Vignette.png-e730473e2ae72f013ca73d653d386433.s3tc.stex"
-path.etc="res://.import/Vignette.png-e730473e2ae72f013ca73d653d386433.etc.stex"
+path="res://.import/Vignette.png-e730473e2ae72f013ca73d653d386433.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Sprites/Helpers/Vignette.png"
-dest_files=[ "res://.import/Vignette.png-e730473e2ae72f013ca73d653d386433.s3tc.stex", "res://.import/Vignette.png-e730473e2ae72f013ca73d653d386433.etc.stex" ]
+dest_files=[ "res://.import/Vignette.png-e730473e2ae72f013ca73d653d386433.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

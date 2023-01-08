@@ -2,21 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/CitySkyScraper.png-bf55ac4860b3d6f7b71025098d7887c7.s3tc.stex"
-path.etc="res://.import/CitySkyScraper.png-bf55ac4860b3d6f7b71025098d7887c7.etc.stex"
+path="res://.import/CitySkyScraper.png-bf55ac4860b3d6f7b71025098d7887c7.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Sprites/Flowers/CitySkyScraper.png"
-dest_files=[ "res://.import/CitySkyScraper.png-bf55ac4860b3d6f7b71025098d7887c7.s3tc.stex", "res://.import/CitySkyScraper.png-bf55ac4860b3d6f7b71025098d7887c7.etc.stex" ]
+dest_files=[ "res://.import/CitySkyScraper.png-bf55ac4860b3d6f7b71025098d7887c7.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
