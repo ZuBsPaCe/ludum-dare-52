@@ -34,6 +34,9 @@ _splotch1_scene = ExtResource( 17 )
 [node name="GameStateMachine" type="Node" parent="."]
 script = ExtResource( 4 )
 
+[node name="FarmLevelStateMachine" type="Node" parent="."]
+script = ExtResource( 4 )
+
 [node name="FlowerLevelStateMachine" type="Node" parent="."]
 script = ExtResource( 4 )
 
@@ -591,6 +594,154 @@ position = Vector2( 1489, 718 )
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FlowerBees/Area"]
+shape = SubResource( 2 )
+
+[node name="Farm" type="Node2D" parent="RevealAreas"]
+visible = false
+script = ExtResource( 9 )
+_reveal_viewport_path = NodePath("../../RevealViewport1")
+
+[node name="Area" type="Area2D" parent="RevealAreas/Farm"]
+position = Vector2( 352, 572 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/Farm/Area"]
+shape = SubResource( 2 )
+
+[node name="FarmField" type="Node2D" parent="RevealAreas"]
+visible = false
+script = ExtResource( 9 )
+_reveal_viewport_path = NodePath("../../RevealViewport2")
+
+[node name="Area" type="Area2D" parent="RevealAreas/FarmField"]
+position = Vector2( 866, 888 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FarmField/Area"]
+shape = SubResource( 2 )
+
+[node name="Area2" type="Area2D" parent="RevealAreas/FarmField"]
+position = Vector2( 1055, 823 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FarmField/Area2"]
+shape = SubResource( 2 )
+
+[node name="Area3" type="Area2D" parent="RevealAreas/FarmField"]
+position = Vector2( 1242, 785 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FarmField/Area3"]
+shape = SubResource( 2 )
+
+[node name="FarmClouds" type="Node2D" parent="RevealAreas"]
+visible = false
+script = ExtResource( 9 )
+_reveal_viewport_path = NodePath("../../RevealViewport3")
+
+[node name="Area" type="Area2D" parent="RevealAreas/FarmClouds"]
+position = Vector2( 842, 215 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FarmClouds/Area"]
+shape = SubResource( 2 )
+
+[node name="Area2" type="Area2D" parent="RevealAreas/FarmClouds"]
+position = Vector2( 1049, 201 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FarmClouds/Area2"]
+shape = SubResource( 2 )
+
+[node name="Area3" type="Area2D" parent="RevealAreas/FarmClouds"]
+position = Vector2( 1234, 228 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FarmClouds/Area3"]
+shape = SubResource( 2 )
+
+[node name="Area4" type="Area2D" parent="RevealAreas/FarmClouds"]
+position = Vector2( 1414, 260 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FarmClouds/Area4"]
+shape = SubResource( 2 )
+
+[node name="Area5" type="Area2D" parent="RevealAreas/FarmClouds"]
+position = Vector2( 1618, 313 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FarmClouds/Area5"]
+shape = SubResource( 2 )
+
+[node name="Area6" type="Area2D" parent="RevealAreas/FarmClouds"]
+position = Vector2( 1734, 137 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FarmClouds/Area6"]
+shape = SubResource( 2 )
+
+[node name="Area7" type="Area2D" parent="RevealAreas/FarmClouds"]
+position = Vector2( 1536, 159 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FarmClouds/Area7"]
+shape = SubResource( 2 )
+
+[node name="FarmCorn" type="Node2D" parent="RevealAreas"]
+visible = false
+script = ExtResource( 9 )
+_reveal_viewport_path = NodePath("../../RevealViewport4")
+
+[node name="Area" type="Area2D" parent="RevealAreas/FarmCorn"]
+position = Vector2( 866, 888 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FarmCorn/Area"]
+shape = SubResource( 2 )
+
+[node name="Area2" type="Area2D" parent="RevealAreas/FarmCorn"]
+position = Vector2( 1055, 823 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FarmCorn/Area2"]
+shape = SubResource( 2 )
+
+[node name="Area3" type="Area2D" parent="RevealAreas/FarmCorn"]
+position = Vector2( 1242, 785 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FarmCorn/Area3"]
+shape = SubResource( 2 )
+
+[node name="FarmSun" type="Node2D" parent="RevealAreas"]
+visible = false
+script = ExtResource( 9 )
+_reveal_viewport_path = NodePath("../../RevealViewport5")
+
+[node name="Area" type="Area2D" parent="RevealAreas/FarmSun"]
+position = Vector2( 101, 205 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FarmSun/Area"]
+shape = SubResource( 2 )
+
+[node name="Area2" type="Area2D" parent="RevealAreas/FarmSun"]
+position = Vector2( 295, 115 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FarmSun/Area2"]
+shape = SubResource( 2 )
+
+[node name="FarmTractor" type="Node2D" parent="RevealAreas"]
+script = ExtResource( 9 )
+_reveal_viewport_path = NodePath("../../RevealViewport6")
+
+[node name="Area" type="Area2D" parent="RevealAreas/FarmTractor"]
+position = Vector2( 515, 580 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealAreas/FarmTractor/Area"]
 shape = SubResource( 2 )
 
 [node name="RevealCursor" type="Node2D" parent="."]

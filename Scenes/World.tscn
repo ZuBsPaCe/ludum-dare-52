@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://Sprites/Flowers/CityMoon.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/Flowers/City.png" type="Texture" id=2]
@@ -17,6 +17,26 @@
 [ext_resource path="res://Sprites/Flowers/NatureBeehive.png" type="Texture" id=15]
 [ext_resource path="res://Scripts/Bees.gd" type="Script" id=16]
 [ext_resource path="res://Scenes/Bee.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Sprites/Farm/Sun.png" type="Texture" id=18]
+[ext_resource path="res://Sprites/Farm/Corn3.png" type="Texture" id=19]
+[ext_resource path="res://Sprites/Farm/Corn6.png" type="Texture" id=20]
+[ext_resource path="res://Sprites/Farm/Corn7.png" type="Texture" id=21]
+[ext_resource path="res://Sprites/Farm/Background.png" type="Texture" id=22]
+[ext_resource path="res://Sprites/Farm/Farm.png" type="Texture" id=23]
+[ext_resource path="res://Sprites/Farm/Corn4.png" type="Texture" id=24]
+[ext_resource path="res://Sprites/Farm/Corn5.png" type="Texture" id=25]
+[ext_resource path="res://Sprites/Farm/Clouds.png" type="Texture" id=26]
+[ext_resource path="res://Sprites/Farm/Corn1.png" type="Texture" id=27]
+[ext_resource path="res://Sprites/Farm/CornHill.png" type="Texture" id=28]
+[ext_resource path="res://Sprites/Farm/Corn2.png" type="Texture" id=29]
+[ext_resource path="res://Sprites/Farm/FarmHill.png" type="Texture" id=30]
+[ext_resource path="res://Sprites/Farm/Field.png" type="Texture" id=31]
+[ext_resource path="res://Sprites/Farm/SecondHill.png" type="Texture" id=32]
+[ext_resource path="res://Sprites/Farm/FirstHill.png" type="Texture" id=33]
+[ext_resource path="res://Sprites/Farm/Rain.png" type="Texture" id=34]
+[ext_resource path="res://Sprites/Farm/Tractor.png" type="Texture" id=35]
+[ext_resource path="res://Sprites/Farm/Trailer.png" type="Texture" id=36]
+[ext_resource path="res://Scripts/Modulator.gd" type="Script" id=37]
 
 [sub_resource type="Animation" id=1]
 resource_name = "LevelDone"
@@ -73,9 +93,438 @@ tracks/1/keys = {
 "values": [ 1.0 ]
 }
 
+[sub_resource type="SpatialMaterial" id=4]
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource( 34 )
+
+[sub_resource type="QuadMesh" id=3]
+material = SubResource( 4 )
+size = Vector2( 0.7, 7 )
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0, 0.616541, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="Animation" id=6]
+resource_name = "LevelDone"
+length = 8.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("FarmTractor:translation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.3, 2.4, 3.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( -4.04683, -0.213121, 4.82382 ), Vector3( -3.70092, -0.213121, 4.82382 ), Vector3( -3.12685, -0.567458, 4.82382 ), Vector3( -2.37523, -1.03991, 4.82382 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("FarmTractor/Tractor:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( -0.0106008, -0.250317, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FarmTractor/Tractor:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, -10 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("FarmTractor/Trailer:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.2, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( -0.79774, -0.173118, 0 ), Vector3( -0.79774, -0.173118, 0 ), Vector3( -0.801905, -0.271457, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("FarmTractor/Trailer:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.9, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, -10 ) ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath("FarmTractor/Tractor")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 2.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "hide"
+} ]
+}
+tracks/6/type = "method"
+tracks/6/path = NodePath("FarmTractor/Trailer")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 2.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "hide"
+} ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("FarmTractor2:translation")
+tracks/7/interp = 2
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 2.9, 5.5, 8.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( -3.12685, -3.71636, 4.82382 ), Vector3( 1.12719, -2.14146, 4.82382 ), Vector3( 5.21762, -1.58801, 4.82382 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("FarmTractor2/Tractor:translation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 2.9, 8.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( -0.00940967, -0.22219, 0 ), Vector3( -0.00940943, -0.315309, 0 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("FarmTractor2/Tractor:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 2.9, 4.4, 5.5, 7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 24 ), Vector3( 0, 0, 22 ), Vector3( 0, 0, 16 ), Vector3( 0, 0, -2 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("FarmTractor2/Trailer:translation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 2.9, 4.4, 5.5, 7, 8.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( -0.663234, -0.725729, 0 ), Vector3( -0.663234, -0.725729, 0 ), Vector3( -0.714967, -0.611917, 0 ), Vector3( -0.79774, -0.436026, 0 ), Vector3( -0.82878, -0.487758, 0 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("FarmTractor2/Trailer:rotation_degrees")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 2.9, 4.4, 5.5, 7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 30 ), Vector3( 0, 0, 28 ), Vector3( 0, 0, 22 ), Vector3( 0, 0, 4 ) ]
+}
+tracks/12/type = "method"
+tracks/12/path = NodePath("FarmTractor2/Tractor")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 2.9, 7.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "reveal"
+}, {
+"args": [  ],
+"method": "hide"
+} ]
+}
+tracks/13/type = "method"
+tracks/13/path = NodePath("FarmTractor2/Trailer")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 2.9, 7.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "reveal"
+}, {
+"args": [  ],
+"method": "hide"
+} ]
+}
+tracks/14/type = "method"
+tracks/14/path = NodePath("FarmCorn1")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 4.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "hide"
+} ]
+}
+tracks/15/type = "method"
+tracks/15/path = NodePath("FarmCorn2")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 4.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "hide"
+} ]
+}
+tracks/16/type = "method"
+tracks/16/path = NodePath("FarmCorn3")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 5.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "hide"
+} ]
+}
+tracks/17/type = "method"
+tracks/17/path = NodePath("FarmCorn4")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 5.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "hide"
+} ]
+}
+tracks/18/type = "method"
+tracks/18/path = NodePath("FarmCorn5")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 6.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "hide"
+} ]
+}
+tracks/19/type = "method"
+tracks/19/path = NodePath("FarmCorn6")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 6.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "hide"
+} ]
+}
+tracks/20/type = "method"
+tracks/20/path = NodePath("FarmCorn7")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 7.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "hide"
+} ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("FarmTractor:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -4.04683, -0.213121, 4.82382 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("FarmTractor/Tractor:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FarmTractor/Tractor:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("FarmTractor/Trailer:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -0.79774, -0.173118, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("FarmTractor/Trailer:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("FarmTractor2:translation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -3.12685, -3.71636, 4.82382 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("FarmTractor2/Tractor:translation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -0.00940967, -0.22219, 0 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("FarmTractor2/Tractor:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 24 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("FarmTractor2/Trailer:translation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -0.663234, -0.725729, 0 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("FarmTractor2/Trailer:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 30 ) ]
+}
+
 [node name="World" type="Spatial"]
 
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40 )
+keep_aspect = 0
+fov = 30.0
+size = 10.0
+far = 200.0
+
 [node name="Flower" type="Spatial" parent="."]
+visible = false
 
 [node name="CityBackground" type="Sprite3D" parent="Flower"]
 modulate = Color( 0.145098, 0.282353, 0.376471, 1 )
@@ -104,13 +553,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.0159, -1.94516, 3.80085 )
 modulate = Color( 0.631373, 0.705882, 0.74902, 1 )
 alpha_cut = 2
 texture = ExtResource( 5 )
-
-[node name="Camera" type="Camera" parent="Flower"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40 )
-keep_aspect = 0
-fov = 30.0
-size = 10.0
-far = 1000.0
 
 [node name="NatureForest" type="Sprite3D" parent="Flower" groups=["Reveal1"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.145073, 0.281404, 2.22584 )
@@ -179,3 +621,142 @@ _bee_count = 1
 [node name="FlowerLevelDonePlayer" type="AnimationPlayer" parent="Flower"]
 anims/LevelDone = SubResource( 1 )
 anims/RESET = SubResource( 2 )
+
+[node name="Farm" type="Spatial" parent="."]
+
+[node name="FarmBackground" type="Sprite3D" parent="Farm"]
+transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1, 0, 0, 0 )
+alpha_cut = 2
+texture = ExtResource( 22 )
+
+[node name="FarmSun" type="Sprite3D" parent="Farm" groups=["Reveal5"]]
+transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1, -8.615, 5.034, 2 )
+alpha_cut = 2
+texture = ExtResource( 18 )
+
+[node name="Farm" type="Sprite3D" parent="Farm" groups=["Reveal1"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.50764, -0.271123, 2 )
+alpha_cut = 2
+texture = ExtResource( 23 )
+
+[node name="FarmHill" type="Sprite3D" parent="Farm"]
+transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1, -0.972, -4.5, 3 )
+alpha_cut = 2
+texture = ExtResource( 30 )
+
+[node name="FarmCornHill" type="Sprite3D" parent="Farm"]
+transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1, 0.636, -5.2, 4 )
+alpha_cut = 2
+texture = ExtResource( 28 )
+
+[node name="FarmTractor" type="Spatial" parent="Farm"]
+transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1, -4.04683, -0.213121, 4.82382 )
+
+[node name="Tractor" type="Sprite3D" parent="Farm/FarmTractor" groups=["Reveal6"]]
+transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1, 0, 0, 0 )
+alpha_cut = 2
+texture = ExtResource( 35 )
+script = ExtResource( 37 )
+
+[node name="Trailer" type="Sprite3D" parent="Farm/FarmTractor" groups=["Reveal6"]]
+transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1, -0.79774, -0.173118, 0 )
+alpha_cut = 2
+texture = ExtResource( 36 )
+script = ExtResource( 37 )
+
+[node name="FarmTractor2" type="Spatial" parent="Farm"]
+transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1, -3.12685, -3.71636, 4.82382 )
+
+[node name="Tractor" type="Sprite3D" parent="Farm/FarmTractor2" groups=["Reveal6"]]
+transform = Transform( 1.09625, -0.488084, 0, 0.488084, 1.09625, 0, 0, 0, 1, -0.00940967, -0.22219, 0 )
+alpha_cut = 2
+texture = ExtResource( 35 )
+script = ExtResource( 37 )
+initially_hidden = true
+
+[node name="Trailer" type="Sprite3D" parent="Farm/FarmTractor2" groups=["Reveal6"]]
+transform = Transform( 1.03923, -0.6, 0, 0.6, 1.03923, 0, 0, 0, 1, -0.663234, -0.725729, 0 )
+alpha_cut = 2
+texture = ExtResource( 36 )
+script = ExtResource( 37 )
+initially_hidden = true
+
+[node name="FarmField" type="Sprite3D" parent="Farm" groups=["Reveal2"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.083, -3.1, 4.2 )
+alpha_cut = 2
+texture = ExtResource( 31 )
+
+[node name="FarmCorn1" type="Sprite3D" parent="Farm" groups=["Reveal4"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.23523, -3.48249, 4.4 )
+alpha_cut = 2
+texture = ExtResource( 27 )
+script = ExtResource( 37 )
+
+[node name="FarmCorn2" type="Sprite3D" parent="Farm" groups=["Reveal4"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.438076, -3.12219, 4.4 )
+alpha_cut = 2
+texture = ExtResource( 29 )
+script = ExtResource( 37 )
+
+[node name="FarmCorn3" type="Sprite3D" parent="Farm" groups=["Reveal4"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.310561, -2.87435, 4.4 )
+alpha_cut = 2
+texture = ExtResource( 19 )
+script = ExtResource( 37 )
+
+[node name="FarmCorn4" type="Sprite3D" parent="Farm" groups=["Reveal4"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.997587, -2.65992, 4.4 )
+alpha_cut = 2
+texture = ExtResource( 24 )
+script = ExtResource( 37 )
+
+[node name="FarmCorn5" type="Sprite3D" parent="Farm" groups=["Reveal4"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6772, -2.49098, 4.4 )
+alpha_cut = 2
+texture = ExtResource( 25 )
+script = ExtResource( 37 )
+
+[node name="FarmCorn6" type="Sprite3D" parent="Farm" groups=["Reveal4"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.39775, -2.3504, 4.4 )
+alpha_cut = 2
+texture = ExtResource( 20 )
+script = ExtResource( 37 )
+
+[node name="FarmCorn7" type="Sprite3D" parent="Farm" groups=["Reveal4"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.25963, -2.24575, 4.4 )
+alpha_cut = 2
+texture = ExtResource( 21 )
+script = ExtResource( 37 )
+
+[node name="FarmClouds" type="Sprite3D" parent="Farm" groups=["Reveal3"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 3.5, 4.79793 )
+alpha_cut = 2
+texture = ExtResource( 26 )
+
+[node name="FarmRain" type="CPUParticles" parent="Farm"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8, 0, 4.543 )
+emitting = false
+amount = 50
+mesh = SubResource( 3 )
+emission_shape = 2
+emission_box_extents = Vector3( 5, 0.8, 0.1 )
+direction = Vector3( -1, 0, 0 )
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 0.5
+initial_velocity_random = 1.0
+color_ramp = SubResource( 5 )
+
+[node name="FarmSecondHill" type="Sprite3D" parent="Farm"]
+transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1, 3, -5, 5 )
+alpha_cut = 2
+texture = ExtResource( 32 )
+
+[node name="FarmFirstHill" type="Sprite3D" parent="Farm"]
+transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1, -3, -4.5, 6 )
+visible = false
+alpha_cut = 2
+texture = ExtResource( 33 )
+
+[node name="FarmLevelDonePlayer" type="AnimationPlayer" parent="Farm"]
+anims/LevelDone = SubResource( 6 )
+anims/RESET = SubResource( 7 )

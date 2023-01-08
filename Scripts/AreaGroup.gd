@@ -46,6 +46,21 @@ func activate():
 	
 	set_process(true)
 	
+	
+func hide():
+	print("Deactivated %s" % name)
+	
+	active = false
+	
+	for area in areas:
+		area.monitoring = false
+		area.monitorable = false
+		
+	reveal_viewport.hide()
+	
+	set_process(false)
+	
+	
 func reveal():
 	assert(!revealed)
 	_finish()

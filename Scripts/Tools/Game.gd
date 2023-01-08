@@ -3,12 +3,26 @@ extends Node2D
 
 const GameState := preload("res://Scripts/Tools/Examples/ExampleGameState.gd").GameState
 
+enum FarmLevelState {
+	RESET,
+	FARM,
+	FARM_FIELD,
+	FARM_CLOUDS,
+	FARM_CORN,
+	FARM_SUN,
+	FARM_TRACTOR,
+	FARM_DONE
+}
+
+
+
 enum FlowerLevelState {
 	RESET,
 	FLOWER_HILLS,
 	FLOWER_TREE,
 	FLOWER_STREAM,
 	FLOWER_BEEHIVE_SUN_FIELD,
+	FLOWER_DONE
 }
 
 
@@ -18,6 +32,7 @@ export(PackedScene) var _splotch1_scene
 
 
 onready var _game_state := $GameStateMachine
+onready var _farm_level_state := $FarmLevelStateMachine
 onready var _flower_level_state := $FlowerLevelStateMachine
 onready var _reveal_viewport1 := $RevealViewport1
 onready var _reveal_viewport2 := $RevealViewport2
@@ -27,6 +42,8 @@ onready var _reveal_viewport5 := $RevealViewport5
 onready var _reveal_viewport6 := $RevealViewport6
 onready var _reveal_viewport7 := $RevealViewport7
 
+onready var _farm_level_rain_particles := $Levels/BackgroundContainer/Viewport/World/Farm/FarmRain
+onready var _farm_level_done_player := $Levels/BackgroundContainer/Viewport/World/Farm/FarmLevelDonePlayer
 onready var _flower_level_done_player := $Levels/BackgroundContainer/Viewport/World/Flower/FlowerLevelDonePlayer
 
 
@@ -60,12 +77,19 @@ func _ready():
 		FuncRef.new(),
 		funcref(self, "_on_GameStateMachine_exit_state"))
 		
+	_farm_level_state.setup(
+		FarmLevelState.RESET,
+		funcref(self, "_on_FarmLevel_enter_state"),
+		funcref(self, "_on_FarmLevel_process_state"),
+		funcref(self, "_on_FarmLevel_exit_state"))
+		
 	_flower_level_state.setup(
 		FlowerLevelState.RESET,
 		funcref(self, "_on_FlowerLevel_enter_state"),
 		funcref(self, "_on_FlowerLevel_process_state"),
 		funcref(self, "_on_FlowerLevel_exit_state"))
 		
+	_farm_level_state.set_process(false)
 	_flower_level_state.set_process(false)
 	
 	
@@ -130,6 +154,9 @@ func _ready():
 				mat.set_shader_param("hide", 1.0)
 				
 			node.material_override = mat
+			
+			if node.has_method("setup"):
+				node.setup()
 
 
 func _process(delta):
@@ -204,15 +231,20 @@ func _on_GameStateMachine_enter_state():
 	match _game_state.current:
 		GameState.MAIN_MENU:
 			$MainMenu.visible = true
-			Effects.shake(Vector2.RIGHT)
+			#Effects.shake(Vector2.RIGHT)
 
 		GameState.GAME:
 			State.on_game_start()
 			$GameOverlay.visible = true
-			Effects.shake(Vector2.RIGHT)
+			#Effects.shake(Vector2.RIGHT)
 			
-			_flower_level_state.set_state_immediate(FlowerLevelState.FLOWER_HILLS)
-			_flower_level_state.set_process(true)
+			_farm_level_state.set_state_immediate(FarmLevelState.FARM)
+			_farm_level_state.set_process(true)
+			
+			#_farm_level_state.set_state(FarmLevelState.FARM_TRACTOR)
+			
+#			_flower_level_state.set_state_immediate(FlowerLevelState.FLOWER_HILLS)
+#			_flower_level_state.set_process(true)
 
 		_:
 			assert(false, "Unknown game state")
@@ -229,7 +261,78 @@ func _on_GameStateMachine_exit_state():
 
 		_:
 			assert(false, "Unknown game state")
+
+func _on_FarmLevel_enter_state():
+	match _farm_level_state.current:
+		FarmLevelState.RESET:
+			_farm_level_state.set_state(FarmLevelState.FARM)
+		
+		FarmLevelState.FARM:
+			_area_groups[Globals.AREAS_FARM].activate()
+
+		FarmLevelState.FARM_FIELD:
+			_area_groups[Globals.AREAS_FARM_FIELD].activate()
 			
+		FarmLevelState.FARM_CLOUDS:
+			_area_groups[Globals.AREAS_FARM_CLOUDS].activate()
+			
+		FarmLevelState.FARM_CORN:
+			_farm_level_rain_particles.emitting = true
+			_area_groups[Globals.AREAS_FARM_CORN].activate()
+			
+		FarmLevelState.FARM_SUN:
+			_area_groups[Globals.AREAS_FARM_SUN].activate()
+			
+		FarmLevelState.FARM_TRACTOR:
+			_area_groups[Globals.AREAS_FARM_TRACTOR].activate()
+			
+		FarmLevelState.FARM_DONE:
+			pass
+
+		_:
+			assert(false, "Unknown game state")
+
+
+func _on_FarmLevel_process_state():	
+	match _farm_level_state.current:			
+		FarmLevelState.FARM:
+			if _area_groups[Globals.AREAS_FARM].revealed:
+				_farm_level_state.set_state(FarmLevelState.FARM_FIELD)
+
+		FarmLevelState.FARM_FIELD:
+			if _area_groups[Globals.AREAS_FARM_FIELD].revealed:
+				_farm_level_state.set_state(FarmLevelState.FARM_CLOUDS)
+				
+		FarmLevelState.FARM_CLOUDS:
+			if _area_groups[Globals.AREAS_FARM_CLOUDS].revealed:
+				_farm_level_state.set_state(FarmLevelState.FARM_CORN)
+				_farm_level_state.wait(4.0)
+				
+		FarmLevelState.FARM_CORN:
+			if _area_groups[Globals.AREAS_FARM_CORN].revealed:
+				_farm_level_state.set_state(FarmLevelState.FARM_SUN)
+				
+		FarmLevelState.FARM_SUN:
+			if _area_groups[Globals.AREAS_FARM_SUN].revealed:
+				_area_groups[Globals.AREAS_FARM_CLOUDS].hide()
+				_farm_level_rain_particles.emitting = false
+				_farm_level_state.set_state(FarmLevelState.FARM_TRACTOR)
+				
+		FarmLevelState.FARM_TRACTOR:
+			if _area_groups[Globals.AREAS_FARM_TRACTOR].revealed:
+				_farm_level_state.set_state(FarmLevelState.FARM_DONE)
+				
+		FarmLevelState.FARM_DONE:
+			_farm_level_done_player.play("LevelDone")
+
+		_:
+			assert(false, "Unknown game state")
+
+func _on_FarmLevel_exit_state():
+	pass
+
+
+
 			
 func _on_FlowerLevel_enter_state():
 	match _flower_level_state.current:
@@ -249,6 +352,9 @@ func _on_FlowerLevel_enter_state():
 			_area_groups[Globals.AREAS_FLOWER_BEEHIVE].activate()
 			_area_groups[Globals.AREAS_FLOWER_SUN].activate()
 			_area_groups[Globals.AREAS_FLOWER_FIELD].activate()
+		
+		FlowerLevelState.FLOWER_DONE:
+			_flower_level_done_player.play("LevelDone")
 
 		_:
 			assert(false, "Unknown game state")
@@ -277,7 +383,10 @@ func _on_FlowerLevel_process_state():
 				_area_groups[Globals.AREAS_FLOWER_BEES].can_reveal):
 				_area_groups[Globals.AREAS_FLOWER_FIELD].reveal()
 				_area_groups[Globals.AREAS_FLOWER_BEES].reveal()
-				_flower_level_done_player.play("LevelDone")
+				_flower_level_state.set_state(FlowerLevelState.FLOWER_DONE)
+		
+		FlowerLevelState.FLOWER_DONE:
+			pass
 
 		_:
 			assert(false, "Unknown game state")

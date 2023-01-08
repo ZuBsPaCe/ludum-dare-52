@@ -12,6 +12,13 @@ const SETTING_SOUND_VOLUME := "Sound"
 const REVEAL_TIME := 8.0
 const AREA_REVEAL_TIME := 4.0
 
+const AREAS_FARM := "Farm" #1
+const AREAS_FARM_FIELD := "FarmField" #2
+const AREAS_FARM_CLOUDS := "FarmClouds" #3
+const AREAS_FARM_CORN := "FarmCorn" #4
+const AREAS_FARM_SUN := "FarmSun" #5
+const AREAS_FARM_TRACTOR := "FarmTractor" #6
+
 const AREAS_FLOWER_HILLS := "FlowerHills" #1
 const AREAS_FLOWER_TREE := "FlowerTree" #2
 const AREAS_FLOWER_STREAM := "FlowerStream" #3
