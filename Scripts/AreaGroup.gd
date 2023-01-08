@@ -57,6 +57,8 @@ func deactivate():
 	print("Deactivated %s" % name)
 	
 	active = false
+	revealed = false
+	can_reveal = false
 	
 	if areas.size() > 0:
 		_check_cooldown.restart()
@@ -64,14 +66,19 @@ func deactivate():
 		for area in areas:
 			area.monitoring = false
 			area.monitorable = false
+	
+	for cooldown in cooldowns:
+		cooldown.set_done()
 		
-		set_process(false)
+	set_process(false)
 	
 	
 func hide():
 	print("Hide %s" % name)
 	
 	active = false
+	revealed = false
+	can_reveal = false
 	
 	for area in areas:
 		area.monitoring = false

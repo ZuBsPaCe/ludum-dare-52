@@ -1079,7 +1079,6 @@ texture = ExtResource( 12 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.08619, -2.09518, 4.41685 )
 script = ExtResource( 16 )
 _bee_scene = ExtResource( 17 )
-_bee_count = 1
 
 [node name="Target" type="Spatial" parent="Flower/Bees"]
 
@@ -1353,6 +1352,7 @@ anims/LevelDone = SubResource( 8 )
 anims/RESET = SubResource( 9 )
 
 [node name="Timber" type="Spatial" parent="."]
+visible = false
 
 [node name="TimberBackground" type="Sprite3D" parent="Timber"]
 transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1, 0, 0, 0 )

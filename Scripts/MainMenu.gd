@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 
-const GameState := preload("res://Scripts/Tools/Examples/ExampleGameState.gd").GameState
+const GameState := preload("res://Scripts/GameState.gd").GameState
 
 
 signal switch_game_state(new_state)
@@ -29,7 +29,15 @@ func setup(
 	
 
 func _on_StartButton_pressed():
-	emit_signal("switch_game_state", GameState.GAME)
+	emit_signal("switch_game_state", GameState.START)
+
+
+func _on_RestartButton_pressed():
+	emit_signal("switch_game_state", GameState.START)
+
+
+func _on_ContinueButton_pressed():
+	emit_signal("switch_game_state", GameState.CONTINUE)
 
 
 func _on_ExitButton_pressed():
@@ -41,3 +49,5 @@ func _on_Volume_changed(_value):
 		"change_volume", 
 		_music_slider.value, 
 		_sound_slider.value)
+
+

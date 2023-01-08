@@ -1,7 +1,14 @@
 extends Node2D
 
 
-const GameState := preload("res://Scripts/Tools/Examples/ExampleGameState.gd").GameState
+const GameState := preload("res://Scripts/GameState.gd").GameState
+
+enum Level {
+	FARM,
+	FLOWER,
+	APPLE,
+	TIMBER
+}
 
 enum FarmLevelState {
 	RESET,
@@ -79,11 +86,17 @@ onready var _apple_level_done_player := $Levels/BackgroundContainer/Viewport/Wor
 onready var _timber_level_woodcut_player := $Levels/BackgroundContainer/Viewport/World/Timber/TimberLevelWoodcutPlayer
 onready var _timber_level_done_player := $Levels/BackgroundContainer/Viewport/World/Timber/TimberLevelDonePlayer
 
+onready var _flower_node := $Levels/BackgroundContainer/Viewport/World/Flower
+onready var _farm_node := $Levels/BackgroundContainer/Viewport/World/Farm
+onready var _apple_node := $Levels/BackgroundContainer/Viewport/World/Apple
+onready var _timber_node := $Levels/BackgroundContainer/Viewport/World/Timber
+
 
 var _splotch_countdown := Cooldown.new()
 
 var _area_groups := {}
 var _world_nodes := {}
+var _reveal_viewports := []
 
 func _ready():
 	Globals.setup()
@@ -109,7 +122,7 @@ func _ready():
 		_initial_game_state,
 		funcref(self, "_on_GameStateMachine_enter_state"),
 		FuncRef.new(),
-		funcref(self, "_on_GameStateMachine_exit_state"))
+		FuncRef.new())
 		
 	_farm_level_state.setup(
 		FarmLevelState.RESET,
@@ -146,6 +159,18 @@ func _ready():
 	for area_group in $RevealAreas.get_children():
 		_area_groups[area_group.name] = area_group
 		
+		
+	_reveal_viewports.append(_reveal_viewport1)
+	_reveal_viewports.append(_reveal_viewport2)
+	_reveal_viewports.append(_reveal_viewport3)
+	_reveal_viewports.append(_reveal_viewport4)
+	_reveal_viewports.append(_reveal_viewport5)
+	_reveal_viewports.append(_reveal_viewport6)
+	_reveal_viewports.append(_reveal_viewport7)
+	_reveal_viewports.append(_reveal_viewport8)
+	_reveal_viewports.append(_reveal_viewport9)
+	_reveal_viewports.append(_reveal_viewport10)
+	
 
 	for node in Tools.get_children_recursive($Levels/BackgroundContainer/Viewport/World):
 		if not node is Sprite3D:
@@ -219,6 +244,12 @@ func _ready():
 				node.setup()
 				
 			_world_nodes[node.name] = node
+			
+	_farm_node.visible = true
+	_flower_node.visible = false
+	_apple_node.visible = false
+	_timber_node.visible = false
+
 
 
 func _process(_delta):
@@ -292,48 +323,116 @@ func change_volume(music_factor: float, sound_factor: float):
 func _on_GameStateMachine_enter_state():
 	match _game_state.current:
 		GameState.MAIN_MENU:
+			_stop_level()
+			
+			get_tree().paused = true
+			
 			$MainMenu.visible = true
-			#Effects.shake(Vector2.RIGHT)
-
-		GameState.GAME:
-			State.on_game_start()
-			$GameOverlay.visible = true
-			#Effects.shake(Vector2.RIGHT)
-			
-#			_farm_level_state.set_state_immediate(FarmLevelState.FARM)
-#			_farm_level_state.set_process(true)
-			
-			#_farm_level_state.set_state(FarmLevelState.FARM_TRACTOR)
-			
-#			_flower_level_state.set_state_immediate(FlowerLevelState.FLOWER_HILLS)
-#			_flower_level_state.set_process(true)
-
-#			_apple_level_state.set_state_immediate(AppleLevelState.APPLE_SMALL_TREE)
-#			_apple_level_state.set_process(true)
-
-			_timber_level_state.set_state_immediate(TimberLevelState.TIMBER_SNOW)
-			_timber_level_state.set_process(true)
-
-		_:
-			assert(false, "Unknown game state")
-
-
-func _on_GameStateMachine_exit_state():
-	match _game_state.current:
-		GameState.MAIN_MENU:
-			$MainMenu.visible = false
-
-		GameState.GAME:
-			State.on_game_stopped()
 			$GameOverlay.visible = false
+			
+			$MainMenu.get_node("%StartButton").visible = true
+			$MainMenu.get_node("%RestartButton").visible = false
+			$MainMenu.get_node("%ContinueButton").visible = false
+			#Effects.shake(Vector2.RIGHT)
+			
+		GameState.START:
+			$MainMenu.visible = false
+			
+			_start_level(Level.FARM)
+			
+			switch_game_state(GameState.GAME)
+
+		GameState.GAME:
+			$GameOverlay.visible = true
+			
+			get_tree().paused = false
+			#Effects.shake(Vector2.RIGHT)
+			
+			
+		GameState.PAUSE:
+			get_tree().paused = true
+			
+			$GameOverlay.visible = false
+			$MainMenu.visible = true
+			$MainMenu.get_node("%StartButton").visible = false
+			$MainMenu.get_node("%RestartButton").visible = true
+			$MainMenu.get_node("%ContinueButton").visible = true
+
+			
+		GameState.CONTINUE:
+			$MainMenu.visible = false
+			$GameOverlay.visible = true
+			
+			switch_game_state(GameState.GAME)
 
 		_:
 			assert(false, "Unknown game state")
+
+
+func _stop_level():
+	for area_group in _area_groups.values():
+		area_group.deactivate()
+	
+	for reveal_viewport in _reveal_viewports:
+		reveal_viewport.hide_fast()
+
+	for node in Tools.get_children_recursive($Levels/BackgroundContainer/Viewport/World):
+		if not node is Sprite3D:
+			continue
+			
+		if node.has_method("setup"):
+			node.setup()	
+	
+	_farm_node.visible = false
+	_flower_node.visible = false
+	_apple_node.visible = false
+	_timber_node.visible = false
+	
+	_farm_level_state.set_process(false)
+	_flower_level_state.set_process(false)
+	_apple_level_state.set_process(false)
+	_timber_level_state.set_process(false)
+	
+	_farm_level_done_player.stop()
+	_flower_level_done_player.stop()
+	_apple_level_done_player.stop()
+	_timber_level_done_player.stop()
+	_timber_level_woodcut_player.stop()
+	
+
+func _start_level(level):
+	_stop_level()
+	
+	match level:
+		Level.FARM:
+			_farm_node.visible = true
+			_farm_level_state.set_state_immediate(FarmLevelState.RESET)
+			_farm_level_state.set_process(true)
+		
+		Level.FLOWER:
+			_flower_node.visible = true
+			_flower_level_state.set_state_immediate(FlowerLevelState.RESET)
+			_flower_level_state.set_process(true)
+			
+		Level.APPLE:
+			_apple_node.visible = true
+			_apple_level_state.set_state_immediate(AppleLevelState.RESET)
+			_apple_level_state.set_process(true)
+			
+		Level.TIMBER:
+			_timber_node.visible = true
+			_timber_level_state.set_state_immediate(TimberLevelState.RESET)
+			_timber_level_state.set_process(true)
+		
+		_:
+			pass
+			
 
 func _on_FarmLevel_enter_state():
 	match _farm_level_state.current:
 		FarmLevelState.RESET:
-			_farm_level_state.set_state(FarmLevelState.FARM)
+			_farm_level_rain_particles.emitting = false
+			_farm_level_state.set_state_immediate(FarmLevelState.FARM)
 		
 		FarmLevelState.FARM:
 			_area_groups[Globals.AREAS_FARM].activate()
@@ -355,14 +454,17 @@ func _on_FarmLevel_enter_state():
 			_area_groups[Globals.AREAS_FARM_TRACTOR].activate()
 			
 		FarmLevelState.FARM_DONE:
-			pass
+			_farm_level_done_player.play("LevelDone")
 
 		_:
 			assert(false, "Unknown game state")
 
 
 func _on_FarmLevel_process_state():	
-	match _farm_level_state.current:			
+	match _farm_level_state.current:
+		FarmLevelState.RESET:
+			pass
+			
 		FarmLevelState.FARM:
 			if _area_groups[Globals.AREAS_FARM].revealed:
 				_farm_level_state.set_state(FarmLevelState.FARM_FIELD)
@@ -391,7 +493,8 @@ func _on_FarmLevel_process_state():
 				_farm_level_state.set_state(FarmLevelState.FARM_DONE)
 				
 		FarmLevelState.FARM_DONE:
-			_farm_level_done_player.play("LevelDone")
+			if _farm_level_done_player.current_animation.empty():
+				_start_level(Level.FLOWER)
 
 		_:
 			assert(false, "Unknown game state")
@@ -405,7 +508,7 @@ func _on_FarmLevel_exit_state():
 func _on_FlowerLevel_enter_state():
 	match _flower_level_state.current:
 		FlowerLevelState.RESET:
-			_flower_level_state.set_state(FlowerLevelState.FLOWER_HILLS)
+			_flower_level_state.set_state_immediate(FlowerLevelState.FLOWER_HILLS)
 		
 		FlowerLevelState.FLOWER_HILLS:
 			_area_groups[Globals.AREAS_FLOWER_HILLS].activate()
@@ -429,7 +532,10 @@ func _on_FlowerLevel_enter_state():
 
 
 func _on_FlowerLevel_process_state():	
-	match _flower_level_state.current:			
+	match _flower_level_state.current:
+		FlowerLevelState.RESET:
+			pass
+				
 		FlowerLevelState.FLOWER_HILLS:
 			if _area_groups[Globals.AREAS_FLOWER_HILLS].revealed:
 				_flower_level_state.set_state(FlowerLevelState.FLOWER_TREE)
@@ -454,7 +560,8 @@ func _on_FlowerLevel_process_state():
 				_flower_level_state.set_state(FlowerLevelState.FLOWER_DONE)
 		
 		FlowerLevelState.FLOWER_DONE:
-			pass
+			if _flower_level_done_player.current_animation.empty():
+				_start_level(Level.APPLE)
 
 		_:
 			assert(false, "Unknown game state")
@@ -467,7 +574,7 @@ func _on_FlowerLevel_exit_state():
 func _on_AppleLevel_enter_state():
 	match _apple_level_state.current:
 		AppleLevelState.RESET:
-			_apple_level_state.set_state(AppleLevelState.APPLE_SMALL_TREE)
+			_apple_level_state.set_state_immediate(AppleLevelState.APPLE_SMALL_TREE)
 		
 		AppleLevelState.APPLE_SMALL_TREE:
 			_area_groups[Globals.AREAS_APPLE_SMALL_TREE].activate()
@@ -505,14 +612,16 @@ func _on_AppleLevel_enter_state():
 		
 		AppleLevelState.APPLE_DONE:
 			_apple_level_done_player.play("LevelDone")
-			pass
 
 		_:
 			assert(false, "Unknown game state")
 
 
 func _on_AppleLevel_process_state():	
-	match _apple_level_state.current:			
+	match _apple_level_state.current:
+		AppleLevelState.RESET:
+			pass
+						
 		AppleLevelState.APPLE_SMALL_TREE:
 			if _area_groups[Globals.AREAS_APPLE_SMALL_TREE].revealed:
 				_apple_level_state.set_state(AppleLevelState.APPLE_MEDIUM_TREE)
@@ -566,7 +675,8 @@ func _on_AppleLevel_process_state():
 				_apple_level_state.set_state(AppleLevelState.APPLE_DONE)
 		
 		AppleLevelState.APPLE_DONE:
-			pass
+			if _apple_level_done_player.current_animation.empty():
+				_start_level(Level.TIMBER)
 
 		_:
 			assert(false, "Unknown game state")
@@ -579,7 +689,7 @@ func _on_AppleLevel_exit_state():
 func _on_TimberLevel_enter_state():
 	match _timber_level_state.current:
 		TimberLevelState.RESET:
-			_timber_level_state.set_state(TimberLevelState.TIMBER_SNOW)
+			_timber_level_state.set_state_immediate(TimberLevelState.TIMBER_SNOW)
 		
 		TimberLevelState.TIMBER_SNOW:
 			_area_groups[Globals.AREAS_TIMBER_SNOW_GROUND_LEFT].activate()
@@ -602,14 +712,16 @@ func _on_TimberLevel_enter_state():
 
 		TimberLevelState.TIMBER_DONE:
 			_timber_level_done_player.play("LevelDone")
-			pass
 
 		_:
 			assert(false, "Unknown game state")
 
 
 func _on_TimberLevel_process_state():	
-	match _timber_level_state.current:			
+	match _timber_level_state.current:
+		TimberLevelState.RESET:
+			pass
+				
 		TimberLevelState.TIMBER_SNOW:
 			if (_area_groups[Globals.AREAS_TIMBER_SNOW_GROUND_LEFT].revealed &&
 				_area_groups[Globals.AREAS_TIMBER_SNOW_GROUND_RIGHT].revealed &&
@@ -635,7 +747,8 @@ func _on_TimberLevel_process_state():
 				_timber_level_state.set_state(TimberLevelState.TIMBER_DONE)
 		
 		TimberLevelState.TIMBER_DONE:
-			pass
+			if _apple_level_done_player.current_animation.empty():
+				switch_game_state(GameState.MAIN_MENU)
 
 		_:
 			assert(false, "Unknown game state")

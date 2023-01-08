@@ -6,7 +6,6 @@
 [ext_resource path="res://Sprites/Helpers/White-1920x1080.png" type="Texture" id=4]
 
 [node name="MainMenu" type="CanvasLayer"]
-pause_mode = 2
 script = ExtResource( 2 )
 
 [node name="White" type="TextureRect" parent="."]
@@ -41,40 +40,24 @@ rect_min_size = Vector2( 0, 700 )
 size_flags_stretch_ratio = 9.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-margin_left = 294.0
+margin_left = 711.0
 margin_top = 704.0
-margin_right = 1606.0
+margin_right = 1189.0
 margin_bottom = 783.0
 size_flags_horizontal = 4
 custom_constants/separation = 80
 
-[node name="RestartButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-margin_right = 321.0
-margin_bottom = 79.0
-size_flags_horizontal = 4
-text = "Restart"
-
-[node name="ContinueButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-margin_left = 401.0
-margin_right = 754.0
-margin_bottom = 79.0
-size_flags_horizontal = 4
-text = "Continue"
-
 [node name="StartButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 834.0
-margin_right = 1064.0
+margin_right = 230.0
 margin_bottom = 79.0
 size_flags_horizontal = 4
 text = "Start"
 
 [node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 1144.0
-margin_right = 1312.0
+margin_left = 310.0
+margin_right = 478.0
 margin_bottom = 79.0
 size_flags_horizontal = 4
 text = "Quit"
@@ -133,8 +116,6 @@ max_value = 1.0
 step = 0.01
 value = 0.8
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/RestartButton" to="." method="_on_RestartButton_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/ContinueButton" to="." method="_on_ContinueButton_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/ExitButton" to="." method="_on_ExitButton_pressed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer2/GridContainer/MusicSlider" to="." method="_on_Volume_changed"]

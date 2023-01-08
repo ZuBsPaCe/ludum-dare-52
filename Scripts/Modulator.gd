@@ -18,6 +18,8 @@ func _ready():
 func setup():
 	if initially_hidden:
 		_update_alpha(0.0)
+	else:
+		_update_alpha(1.0)
 		
 	
 func hide():
