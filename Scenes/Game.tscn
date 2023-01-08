@@ -48,17 +48,17 @@ bus = "Music"
 [node name="LevelStartSound" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
 stream = ExtResource( 12 )
-bus = "Music"
+bus = "Sounds"
 
 [node name="LevelEndMusic" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
 stream = ExtResource( 12 )
-bus = "Music"
+bus = "Sounds"
 
 [node name="LevelStepMusic" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
 stream = ExtResource( 13 )
-bus = "Music"
+bus = "Sounds"
 
 [node name="GameStateMachine" type="Node" parent="."]
 pause_mode = 2
