@@ -749,7 +749,7 @@ func _on_TimberLevel_process_state():
 				_timber_level_state.set_state(TimberLevelState.TIMBER_DONE)
 		
 		TimberLevelState.TIMBER_DONE:
-			if _apple_level_done_player.current_animation.empty():
+			if _timber_level_done_player.current_animation.empty():
 				switch_game_state(GameState.MAIN_MENU)
 
 		_:
