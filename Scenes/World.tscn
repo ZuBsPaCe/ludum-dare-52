@@ -1,4 +1,4 @@
-[gd_scene load_steps=102 format=2]
+[gd_scene load_steps=103 format=2]
 
 [ext_resource path="res://Sprites/Flowers/CityMoon.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/Flowers/City.png" type="Texture" id=2]
@@ -76,6 +76,7 @@
 [ext_resource path="res://Sprites/Menu/Level3.png" type="Texture" id=74]
 [ext_resource path="res://Sprites/Menu/Level4.png" type="Texture" id=75]
 [ext_resource path="res://Sprites/Menu/Level2.png" type="Texture" id=76]
+[ext_resource path="res://Sprites/Menu/ThankYou.png" type="Texture" id=77]
 
 [sub_resource type="Animation" id=1]
 resource_name = "LevelDone"
@@ -1019,7 +1020,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id=12]
 resource_name = "LevelDone"
-length = 4.0
+length = 14.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Hermit:translation")
 tracks/0/interp = 1
@@ -1138,6 +1139,18 @@ tracks/8/keys = {
 "update": 1,
 "values": [ false, true ]
 }
+tracks/9/type = "value"
+tracks/9/path = NodePath("ThankYou/ThankYou:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 4, 6, 9, 12 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.247059, 0.294118, 0.27451, 0 ), Color( 0.247059, 0.294118, 0.27451, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
 
 [sub_resource type="Animation" id=13]
 length = 0.001
@@ -1188,6 +1201,18 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("ThankYou/ThankYou:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.247059, 0.294118, 0.27451, 0 ) ]
 }
 
 [sub_resource type="Animation" id=24]
@@ -1919,3 +1944,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 texture = ExtResource( 75 )
+
+[node name="ThankYou" type="CanvasLayer" parent="Timber"]
+
+[node name="ThankYou" type="TextureRect" parent="Timber/ThankYou"]
+modulate = Color( 0.247059, 0.294118, 0.27451, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 77 )
