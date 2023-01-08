@@ -1556,7 +1556,6 @@ mouse_filter = 2
 texture = ExtResource( 72 )
 
 [node name="Apple" type="Spatial" parent="."]
-visible = false
 
 [node name="AppleBackground" type="Sprite3D" parent="Apple"]
 transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1, 0, 0, 0 )
@@ -1726,6 +1725,7 @@ mouse_filter = 2
 texture = ExtResource( 74 )
 
 [node name="Timber" type="Spatial" parent="."]
+visible = false
 
 [node name="TimberBackground" type="Sprite3D" parent="Timber"]
 transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1, 0, 0, 0 )

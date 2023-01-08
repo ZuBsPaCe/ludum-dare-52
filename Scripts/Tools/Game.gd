@@ -765,6 +765,7 @@ func _on_TimberLevel_enter_state():
 			_area_groups[Globals.AREAS_TIMBER_FIRE].activate()
 
 		TimberLevelState.TIMBER_DONE:
+			$LevelEndMusic.play()
 			_timber_level_done_player.play("LevelDone")
 
 		_:
@@ -801,7 +802,6 @@ func _on_TimberLevel_process_state():
 				_timber_level_state.set_state(TimberLevelState.TIMBER_DONE)
 		
 		TimberLevelState.TIMBER_DONE:
-			$LevelEndMusic.play()
 			if _timber_level_done_player.current_animation.empty():
 				switch_game_state(GameState.MAIN_MENU)
 
