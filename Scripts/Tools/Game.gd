@@ -41,6 +41,15 @@ enum AppleLevelState {
 	APPLE_DONE
 }
 
+enum TimberLevelState {
+	RESET,
+	TIMBER_SNOW,
+	TIMBER_BRIDGE,
+	TIMBER_WOODCUT,
+	TIMBER_FIRE,
+	TIMBER_DONE
+}
+
 
 export(GameState) var _initial_game_state := GameState.MAIN_MENU
 
@@ -51,6 +60,7 @@ onready var _game_state := $GameStateMachine
 onready var _farm_level_state := $FarmLevelStateMachine
 onready var _flower_level_state := $FlowerLevelStateMachine
 onready var _apple_level_state := $AppleLevelStateMachine
+onready var _timber_level_state := $TimberLevelStateMachine
 onready var _reveal_viewport1 := $RevealViewport1
 onready var _reveal_viewport2 := $RevealViewport2
 onready var _reveal_viewport3 := $RevealViewport3
@@ -66,6 +76,8 @@ onready var _farm_level_rain_particles := $Levels/BackgroundContainer/Viewport/W
 onready var _farm_level_done_player := $Levels/BackgroundContainer/Viewport/World/Farm/FarmLevelDonePlayer
 onready var _flower_level_done_player := $Levels/BackgroundContainer/Viewport/World/Flower/FlowerLevelDonePlayer
 onready var _apple_level_done_player := $Levels/BackgroundContainer/Viewport/World/Apple/AppleLevelDonePlayer
+onready var _timber_level_woodcut_player := $Levels/BackgroundContainer/Viewport/World/Timber/TimberLevelWoodcutPlayer
+onready var _timber_level_done_player := $Levels/BackgroundContainer/Viewport/World/Timber/TimberLevelDonePlayer
 
 
 var _splotch_countdown := Cooldown.new()
@@ -117,9 +129,16 @@ func _ready():
 		funcref(self, "_on_AppleLevel_process_state"),
 		funcref(self, "_on_AppleLevel_exit_state"))
 		
+	_timber_level_state.setup(
+		AppleLevelState.RESET,
+		funcref(self, "_on_TimberLevel_enter_state"),
+		funcref(self, "_on_TimberLevel_process_state"),
+		funcref(self, "_on_TimberLevel_exit_state"))
+		
 	_farm_level_state.set_process(false)
 	_flower_level_state.set_process(false)
 	_apple_level_state.set_process(false)
+	_timber_level_state.set_process(false)
 	
 	
 	_splotch_countdown.setup(self, 0.05, true)
@@ -289,8 +308,11 @@ func _on_GameStateMachine_enter_state():
 #			_flower_level_state.set_state_immediate(FlowerLevelState.FLOWER_HILLS)
 #			_flower_level_state.set_process(true)
 
-			_apple_level_state.set_state_immediate(AppleLevelState.APPLE_SMALL_TREE)
-			_apple_level_state.set_process(true)
+#			_apple_level_state.set_state_immediate(AppleLevelState.APPLE_SMALL_TREE)
+#			_apple_level_state.set_process(true)
+
+			_timber_level_state.set_state_immediate(TimberLevelState.TIMBER_SNOW)
+			_timber_level_state.set_process(true)
 
 		_:
 			assert(false, "Unknown game state")
@@ -550,4 +572,73 @@ func _on_AppleLevel_process_state():
 			assert(false, "Unknown game state")
 
 func _on_AppleLevel_exit_state():
+	pass
+
+
+
+func _on_TimberLevel_enter_state():
+	match _timber_level_state.current:
+		TimberLevelState.RESET:
+			_timber_level_state.set_state(TimberLevelState.TIMBER_SNOW)
+		
+		TimberLevelState.TIMBER_SNOW:
+			_area_groups[Globals.AREAS_TIMBER_SNOW_GROUND_LEFT].activate()
+			_area_groups[Globals.AREAS_TIMBER_SNOW_GROUND_RIGHT].activate()
+			_area_groups[Globals.AREAS_TIMBER_SNOW1_LEFT].activate()
+			_area_groups[Globals.AREAS_TIMBER_SNOW1_RIGHT].activate()
+			_area_groups[Globals.AREAS_TIMBER_SNOW2_LEFT].activate()
+			_area_groups[Globals.AREAS_TIMBER_SNOW2_RIGHT].activate()
+			_area_groups[Globals.AREAS_TIMBER_SNOW3].activate()
+		
+		TimberLevelState.TIMBER_BRIDGE:
+			_area_groups[Globals.AREAS_TIMBER_RIVER].reveal()
+			_area_groups[Globals.AREAS_TIMBER_BRIDGE].activate()
+			
+		TimberLevelState.TIMBER_WOODCUT:
+			_area_groups[Globals.AREAS_TIMBER_WOODCUT].activate()
+			
+		TimberLevelState.TIMBER_FIRE:
+			_area_groups[Globals.AREAS_TIMBER_FIRE].activate()
+
+		TimberLevelState.TIMBER_DONE:
+			_timber_level_done_player.play("LevelDone")
+			pass
+
+		_:
+			assert(false, "Unknown game state")
+
+
+func _on_TimberLevel_process_state():	
+	match _timber_level_state.current:			
+		TimberLevelState.TIMBER_SNOW:
+			if (_area_groups[Globals.AREAS_TIMBER_SNOW_GROUND_LEFT].revealed &&
+				_area_groups[Globals.AREAS_TIMBER_SNOW_GROUND_RIGHT].revealed &&
+				_area_groups[Globals.AREAS_TIMBER_SNOW1_LEFT].revealed &&
+				_area_groups[Globals.AREAS_TIMBER_SNOW1_RIGHT].revealed &&
+				_area_groups[Globals.AREAS_TIMBER_SNOW2_LEFT].revealed &&
+				_area_groups[Globals.AREAS_TIMBER_SNOW2_RIGHT].revealed &&
+				_area_groups[Globals.AREAS_TIMBER_SNOW3].revealed):
+				_timber_level_state.set_state(TimberLevelState.TIMBER_BRIDGE)
+				
+		TimberLevelState.TIMBER_BRIDGE:
+			if _area_groups[Globals.AREAS_TIMBER_BRIDGE].revealed:
+				_timber_level_state.set_state(TimberLevelState.TIMBER_WOODCUT)
+				
+		TimberLevelState.TIMBER_WOODCUT:
+			if _area_groups[Globals.AREAS_TIMBER_WOODCUT].revealed:
+				_timber_level_woodcut_player.play("Woodcut")
+				_timber_level_state.set_state(TimberLevelState.TIMBER_FIRE)
+				_timber_level_state.wait(10.0)
+				
+		TimberLevelState.TIMBER_FIRE:
+			if _area_groups[Globals.AREAS_TIMBER_FIRE].revealed:
+				_timber_level_state.set_state(TimberLevelState.TIMBER_DONE)
+		
+		TimberLevelState.TIMBER_DONE:
+			pass
+
+		_:
+			assert(false, "Unknown game state")
+
+func _on_TimberLevel_exit_state():
 	pass

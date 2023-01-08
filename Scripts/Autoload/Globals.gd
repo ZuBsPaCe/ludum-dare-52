@@ -39,6 +39,18 @@ const AREAS_APPLE_NEWTON_WALK4 := "AppleNewtonWalk4" #9
 const AREAS_APPLE_NEWTON_SIT := "AppleNewtonSit" #10
 const AREAS_APPLE_NEWTON_HEUREKA := "AppleNewtonHeureka" #-
 
+const AREAS_TIMBER_SNOW_GROUND_LEFT := "TimberSnowGroundLeft" #1
+const AREAS_TIMBER_SNOW_GROUND_RIGHT := "TimberSnowGroundRight" #2
+const AREAS_TIMBER_SNOW1_LEFT := "TimberSnow1Left" #3
+const AREAS_TIMBER_SNOW1_RIGHT := "TimberSnow1Right" #4
+const AREAS_TIMBER_SNOW2_LEFT := "TimberSnow2Left" #5
+const AREAS_TIMBER_SNOW2_RIGHT := "TimberSnow2Right" #6
+const AREAS_TIMBER_SNOW3 := "TimberSnow3" #7
+const AREAS_TIMBER_RIVER := "TimberRiver" #8
+const AREAS_TIMBER_BRIDGE := "TimberBridge" #9
+const AREAS_TIMBER_WOODCUT := "TimberWoodcut" #10
+const AREAS_TIMBER_FIRE := "TimberFire" #-
+
 var _center_node: Node2D
 var _settings: Dictionary
 

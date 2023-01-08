@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=84 format=2]
 
 [ext_resource path="res://Sprites/Flowers/CityMoon.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/Flowers/City.png" type="Texture" id=2]
@@ -50,6 +50,26 @@
 [ext_resource path="res://Sprites/Apple/NewtonHead.png" type="Texture" id=48]
 [ext_resource path="res://Sprites/Apple/NewtonSit.png" type="Texture" id=49]
 [ext_resource path="res://Sprites/Apple/NewtonWalk.png" type="Texture" id=50]
+[ext_resource path="res://Sprites/Timber/Snow2Left.png" type="Texture" id=51]
+[ext_resource path="res://Sprites/Timber/Mountain1.png" type="Texture" id=52]
+[ext_resource path="res://Sprites/Timber/Snow1Left.png" type="Texture" id=53]
+[ext_resource path="res://Sprites/Timber/LargeRiver.png" type="Texture" id=54]
+[ext_resource path="res://Sprites/Timber/House.png" type="Texture" id=55]
+[ext_resource path="res://Sprites/Timber/Mountain2.png" type="Texture" id=56]
+[ext_resource path="res://Sprites/Timber/Snow2Right.png" type="Texture" id=57]
+[ext_resource path="res://Sprites/Timber/Snow1Right.png" type="Texture" id=58]
+[ext_resource path="res://Sprites/Timber/Snow3.png" type="Texture" id=59]
+[ext_resource path="res://Sprites/Timber/Bridge.png" type="Texture" id=60]
+[ext_resource path="res://Sprites/Timber/SmallRiver.png" type="Texture" id=61]
+[ext_resource path="res://Sprites/Timber/Background.png" type="Texture" id=62]
+[ext_resource path="res://Sprites/Timber/Ground.png" type="Texture" id=63]
+[ext_resource path="res://Sprites/Timber/Mountain3.png" type="Texture" id=64]
+[ext_resource path="res://Sprites/Timber/Forest.png" type="Texture" id=65]
+[ext_resource path="res://Sprites/Timber/LargeTree.png" type="Texture" id=66]
+[ext_resource path="res://Sprites/Timber/SnowGroundRight.png" type="Texture" id=67]
+[ext_resource path="res://Sprites/Timber/SnowGroundLeft.png" type="Texture" id=68]
+[ext_resource path="res://Sprites/Timber/Hermit.png" type="Texture" id=69]
+[ext_resource path="res://Sprites/Timber/Fire.png" type="Texture" id=70]
 
 [sub_resource type="Animation" id=1]
 resource_name = "LevelDone"
@@ -679,6 +699,286 @@ tracks/5/keys = {
 "values": [ Vector3( -0.18, 0.5, 3 ) ]
 }
 
+[sub_resource type="Animation" id=10]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Hermit:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -5.14918, -2.9494, 5.16067 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Hermit2:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 5.92191, -2.48215, 5.34777 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("LargeTreePivot:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 6.47462, -2.65638, 5.31067 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("LargeTreePivot:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "Woodcut"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Hermit:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -5.14918, -2.9494, 5.16067 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("Hermit")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "hide"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Hermit2:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 5.92191, -2.48215, 5.34777 ) ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath("Hermit2")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "reveal"
+} ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("LargeTreePivot:translation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 6.47462, -2.65638, 5.31067 ), Vector3( 6.47462, -2.65638, 5.31067 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("LargeTreePivot:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 4, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9, 6, 6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8, 6.9, 8, 8.3, 8.6, 9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, -3 ), Vector3( 0, 0, 3 ), Vector3( 0, 0, -3 ), Vector3( 0, 0, 3 ), Vector3( 0, 0, -2.5 ), Vector3( 0, 0, 2.5 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, 1 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, -3 ), Vector3( 0, 0, 3 ), Vector3( 0, 0, -3 ), Vector3( 0, 0, 3 ), Vector3( 0, 0, -2.5 ), Vector3( 0, 0, 2.5 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, 1 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, -3 ), Vector3( 0, 0, 3 ), Vector3( 0, 0, -3 ), Vector3( 0, 0, 3 ), Vector3( 0, 0, -2.5 ), Vector3( 0, 0, 2.5 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, 1 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, -15 ), Vector3( 0, 0, -28 ), Vector3( 0, 0, -60.72 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "LevelDone"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Hermit:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -5.14918, -2.9494, 5.16067 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Hermit:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Hermit:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -1.05, 1.05, 1 ) ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath("Fire")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "reveal"
+} ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("LargeTree2")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "reveal"
+} ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath("Hermit")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "reveal"
+} ]
+}
+tracks/6/type = "method"
+tracks/6/path = NodePath("LargeTreePivot/LargeTree")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "hide"
+} ]
+}
+tracks/7/type = "method"
+tracks/7/path = NodePath("Hermit2")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "hide"
+} ]
+}
+
+[sub_resource type="Animation" id=13]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Hermit:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -5.14918, -2.9494, 5.16067 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Hermit:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Hermit:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -1.05, 1.05, 1 ) ]
+}
+
 [node name="World" type="Spatial"]
 
 [node name="Camera" type="Camera" parent="."]
@@ -928,6 +1228,7 @@ anims/LevelDone = SubResource( 6 )
 anims/RESET = SubResource( 7 )
 
 [node name="Apple" type="Spatial" parent="."]
+visible = false
 
 [node name="AppleBackground" type="Sprite3D" parent="Apple"]
 transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1, 0, 0, 0 )
@@ -1050,3 +1351,134 @@ texture = ExtResource( 48 )
 [node name="AppleLevelDonePlayer" type="AnimationPlayer" parent="Apple"]
 anims/LevelDone = SubResource( 8 )
 anims/RESET = SubResource( 9 )
+
+[node name="Timber" type="Spatial" parent="."]
+
+[node name="TimberBackground" type="Sprite3D" parent="Timber"]
+transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1, 0, 0, 0 )
+alpha_cut = 2
+texture = ExtResource( 62 )
+
+[node name="Mountain3" type="Sprite3D" parent="Timber"]
+transform = Transform( 1.1, 0, 0, 0, 1.1, 0, 0, 0, 1, 0, -1, 1 )
+alpha_cut = 2
+texture = ExtResource( 64 )
+
+[node name="Snow3" type="Sprite3D" parent="Timber" groups=["Hide7"]]
+transform = Transform( 1.1, 0, 0, 0, 1.1, 0, 0, 0, 1, 0, 3.90602, 1.2 )
+alpha_cut = 2
+texture = ExtResource( 59 )
+
+[node name="Mountain2" type="Sprite3D" parent="Timber"]
+transform = Transform( 1.05, 0, 0, 0, 1.05, 0, 0, 0, 1, 0, -1.3, 2 )
+alpha_cut = 2
+texture = ExtResource( 56 )
+
+[node name="Snow2Left" type="Sprite3D" parent="Timber" groups=["Hide5"]]
+transform = Transform( 1.05, 0, 0, 0, 1.05, 0, 0, 0, 1, -6.65719, 3.25966, 3.40127 )
+alpha_cut = 2
+texture = ExtResource( 51 )
+
+[node name="Snow2Right" type="Sprite3D" parent="Timber" groups=["Hide6"]]
+transform = Transform( 1.05, 0, 0, 0, 1.05, 0, 0, 0, 1, 8.28125, 3.35644, 3.40127 )
+alpha_cut = 2
+texture = ExtResource( 57 )
+
+[node name="Mountain1" type="Sprite3D" parent="Timber"]
+transform = Transform( 1.05, 0, 0, 0, 1.05, 0, 0, 0, 1, 0, -2, 3.41067 )
+alpha_cut = 2
+texture = ExtResource( 52 )
+
+[node name="Snow1Left" type="Sprite3D" parent="Timber" groups=["Hide3"]]
+transform = Transform( 1.05, 0, 0, 0, 1.05, 0, 0, 0, 1, -8.72614, 2.41257, 4.93477 )
+alpha_cut = 2
+texture = ExtResource( 53 )
+
+[node name="Snow1Right" type="Sprite3D" parent="Timber" groups=["Hide4"]]
+transform = Transform( 1.05, 0, 0, 0, 1.05, 0, 0, 0, 1, 9.07013, 2.41257, 4.93477 )
+alpha_cut = 2
+texture = ExtResource( 58 )
+
+[node name="Ground" type="Sprite3D" parent="Timber"]
+transform = Transform( 1.05, 0, 0, 0, 1.05, 0, 0, 0, 1, 0, -2, 5.41067 )
+alpha_cut = 2
+texture = ExtResource( 63 )
+
+[node name="SnowGroundLeft" type="Sprite3D" parent="Timber" groups=["Hide1"]]
+transform = Transform( 1.05, 0, 0, 0, 1.05, 0, 0, 0, 1, -9.20104, -0.609, 7.41067 )
+alpha_cut = 2
+texture = ExtResource( 68 )
+
+[node name="SnowGroundRight" type="Sprite3D" parent="Timber" groups=["Hide2"]]
+transform = Transform( 1.05, 0, 0, 0, 1.05, 0, 0, 0, 1, 8.9156, -0.243, 7.41067 )
+alpha_cut = 2
+texture = ExtResource( 67 )
+
+[node name="Bridge" type="Sprite3D" parent="Timber" groups=["Reveal9"]]
+transform = Transform( 1.05, 0, 0, 0, 1.05, 0, 0, 0, 1, -1.03594, -3.87341, 4.91067 )
+alpha_cut = 2
+texture = ExtResource( 60 )
+
+[node name="SmallRiver" type="Sprite3D" parent="Timber"]
+transform = Transform( 1.05, 0, 0, 0, 1.05, 0, 0, 0, 1, -1.036, -5.19516, 5.16067 )
+alpha_cut = 2
+texture = ExtResource( 61 )
+
+[node name="LargeRiver" type="Sprite3D" parent="Timber" groups=["Hide8"]]
+transform = Transform( 1.05, 0, 0, 0, 1.05, 0, 0, 0, 1, -1.036, -4.91142, 5.16067 )
+alpha_cut = 2
+texture = ExtResource( 54 )
+
+[node name="House" type="Sprite3D" parent="Timber"]
+transform = Transform( 1.05, 0, 0, 0, 1.05, 0, 0, 0, 1, -6.89139, -2.21035, 5.16067 )
+alpha_cut = 2
+texture = ExtResource( 55 )
+
+[node name="Fire" type="Sprite3D" parent="Timber" groups=["Reveal10"]]
+transform = Transform( 1.05, 0, 0, 0, 1.05, 0, 0, 0, 1, -5.54939, -3.03794, 5.16067 )
+alpha_cut = 2
+texture = ExtResource( 70 )
+script = ExtResource( 37 )
+initially_hidden = true
+
+[node name="LargeTree2" type="Sprite3D" parent="Timber" groups=["Reveal10"]]
+transform = Transform( -0.104614, -1.04478, 0, 1.04478, -0.104614, 0, 0, 0, 1, -6.61115, -3.03801, 5.3 )
+alpha_cut = 2
+texture = ExtResource( 66 )
+script = ExtResource( 37 )
+initially_hidden = true
+
+[node name="Hermit" type="Sprite3D" parent="Timber" groups=["Reveal10"]]
+transform = Transform( -1.05, 0, 0, 0, 1.05, 0, 0, 0, 1, -5.14918, -2.9494, 5.16067 )
+alpha_cut = 2
+texture = ExtResource( 69 )
+script = ExtResource( 37 )
+
+[node name="Hermit2" type="Sprite3D" parent="Timber" groups=["Reveal10"]]
+transform = Transform( 1.05, 0, 0, 0, 1.05, 0, 0, 0, 1, 5.92191, -2.48215, 5.34777 )
+alpha_cut = 2
+texture = ExtResource( 69 )
+script = ExtResource( 37 )
+initially_hidden = true
+
+[node name="Forest" type="Sprite3D" parent="Timber"]
+transform = Transform( 1.05, 0, 0, 0, 1.05, 0, 0, 0, 1, 6, -2.4, 4.8 )
+alpha_cut = 2
+texture = ExtResource( 65 )
+
+[node name="LargeTreePivot" type="Spatial" parent="Timber" groups=["Reveal10"]]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 6.47462, -2.65638, 5.31067 )
+
+[node name="LargeTree" type="Sprite3D" parent="Timber/LargeTreePivot" groups=["Reveal10"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.510014, 0 )
+alpha_cut = 2
+texture = ExtResource( 66 )
+script = ExtResource( 37 )
+
+[node name="TimberLevelWoodcutPlayer" type="AnimationPlayer" parent="Timber"]
+anims/RESET = SubResource( 10 )
+anims/Woodcut = SubResource( 11 )
+
+[node name="TimberLevelDonePlayer" type="AnimationPlayer" parent="Timber"]
+anims/LevelDone = SubResource( 12 )
+anims/RESET = SubResource( 13 )
