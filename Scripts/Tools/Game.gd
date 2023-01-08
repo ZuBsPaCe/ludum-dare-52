@@ -346,7 +346,7 @@ func _on_GameStateMachine_enter_state():
 		GameState.START:
 			$MainMenu.visible = false
 			
-			_start_level(Level.FLOWER)
+			_start_level(Level.FARM)
 			
 			switch_game_state(GameState.GAME)
 
@@ -458,6 +458,8 @@ func _start_level(level):
 			
 		_:
 			pass
+	
+	$LevelStartSound.play()
 			
 
 func _on_FarmLevel_enter_state():
@@ -470,22 +472,28 @@ func _on_FarmLevel_enter_state():
 			_area_groups[Globals.AREAS_FARM].activate()
 
 		FarmLevelState.FARM_FIELD:
+			$LevelStepMusic.play()
 			_area_groups[Globals.AREAS_FARM_FIELD].activate()
 			
 		FarmLevelState.FARM_CLOUDS:
+			$LevelStepMusic.play()
 			_area_groups[Globals.AREAS_FARM_CLOUDS].activate()
 			
 		FarmLevelState.FARM_CORN:
+			$LevelStepMusic.play()
 			_farm_level_rain_particles.emitting = true
 			_area_groups[Globals.AREAS_FARM_CORN].activate()
 			
 		FarmLevelState.FARM_SUN:
+			$LevelStepMusic.play()
 			_area_groups[Globals.AREAS_FARM_SUN].activate()
 			
 		FarmLevelState.FARM_TRACTOR:
+			$LevelStepMusic.play()
 			_area_groups[Globals.AREAS_FARM_TRACTOR].activate()
 			
 		FarmLevelState.FARM_DONE:
+			$LevelEndMusic.play()
 			_farm_level_done_player.play("LevelDone")
 
 		_:
@@ -546,17 +554,21 @@ func _on_FlowerLevel_enter_state():
 			_area_groups[Globals.AREAS_FLOWER_HILLS].activate()
 
 		FlowerLevelState.FLOWER_TREE:
+			$LevelStepMusic.play()
 			_area_groups[Globals.AREAS_FLOWER_TREE].activate()
 		
 		FlowerLevelState.FLOWER_STREAM:
+			$LevelStepMusic.play()
 			_area_groups[Globals.AREAS_FLOWER_STREAM].activate()
 		
 		FlowerLevelState.FLOWER_BEEHIVE_SUN_FIELD:
+			$LevelStepMusic.play()
 			_area_groups[Globals.AREAS_FLOWER_BEEHIVE].activate()
 			_area_groups[Globals.AREAS_FLOWER_SUN].activate()
 			_area_groups[Globals.AREAS_FLOWER_FIELD].activate()
 		
 		FlowerLevelState.FLOWER_DONE:
+			$LevelEndMusic.play()
 			_flower_level_done_player.play("LevelDone")
 
 		_:
@@ -612,6 +624,7 @@ func _on_AppleLevel_enter_state():
 			_area_groups[Globals.AREAS_APPLE_SMALL_TREE].activate()
 
 		AppleLevelState.APPLE_MEDIUM_TREE:
+			$LevelStepMusic.play()
 			_world_nodes["AppleTreeSmall"].material_override.set_shader_param("reveal_tex", _reveal_viewport2.get_texture())
 			_world_nodes["AppleTreeSmall"].material_override.set_shader_param("hide", 1.0)
 			
@@ -621,6 +634,7 @@ func _on_AppleLevel_enter_state():
 			_area_groups[Globals.AREAS_APPLE_MEDIUM_TREE].activate()
 		
 		AppleLevelState.APPLE_LARGE_TREE:
+			$LevelStepMusic.play()
 			_world_nodes["AppleTreeMedium"].material_override.set_shader_param("reveal_tex", _reveal_viewport3.get_texture())
 			_world_nodes["AppleTreeMedium"].material_override.set_shader_param("hide", 1.0)
 			
@@ -630,19 +644,24 @@ func _on_AppleLevel_enter_state():
 			_area_groups[Globals.AREAS_APPLE_LARGE_TREE].activate()
 		
 		AppleLevelState.APPLE_FRUITS:
+			$LevelStepMusic.play()
 			_area_groups[Globals.AREAS_APPLE_FRUITS].activate()
 		
 		AppleLevelState.APPLE_PATH:
+			$LevelStepMusic.play()
 			_area_groups[Globals.AREAS_APPLE_PATH].activate()
 			_area_groups[Globals.AREAS_APPLE_NEWTON_WALK1].activate()
 		
 		AppleLevelState.APPLE_NEWTON_SIT:
+			$LevelStepMusic.play()
 			_area_groups[Globals.AREAS_APPLE_NEWTON_SIT].activate()
 			
 		AppleLevelState.APPLE_NEWTON_HEUREKA:
+			$LevelStepMusic.play()
 			_area_groups[Globals.AREAS_APPLE_NEWTON_HEUREKA].activate()
 		
 		AppleLevelState.APPLE_DONE:
+			$LevelEndMusic.play()
 			_apple_level_done_player.play("LevelDone")
 
 		_:
@@ -733,13 +752,16 @@ func _on_TimberLevel_enter_state():
 			_area_groups[Globals.AREAS_TIMBER_SNOW3].activate()
 		
 		TimberLevelState.TIMBER_BRIDGE:
+			$LevelStepMusic.play()
 			_area_groups[Globals.AREAS_TIMBER_RIVER].reveal()
 			_area_groups[Globals.AREAS_TIMBER_BRIDGE].activate()
 			
 		TimberLevelState.TIMBER_WOODCUT:
+			$LevelStepMusic.play()
 			_area_groups[Globals.AREAS_TIMBER_WOODCUT].activate()
 			
 		TimberLevelState.TIMBER_FIRE:
+			$LevelStepMusic.play()
 			_area_groups[Globals.AREAS_TIMBER_FIRE].activate()
 
 		TimberLevelState.TIMBER_DONE:
@@ -779,6 +801,7 @@ func _on_TimberLevel_process_state():
 				_timber_level_state.set_state(TimberLevelState.TIMBER_DONE)
 		
 		TimberLevelState.TIMBER_DONE:
+			$LevelEndMusic.play()
 			if _timber_level_done_player.current_animation.empty():
 				switch_game_state(GameState.MAIN_MENU)
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scripts/Tools/Game.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Tools/CameraShake.gd" type="Script" id=2]
@@ -10,6 +10,9 @@
 [ext_resource path="res://Scripts/RevealViewport.gd" type="Script" id=8]
 [ext_resource path="res://Scripts/AreaGroup.gd" type="Script" id=9]
 [ext_resource path="res://Sprites/Helpers/Vignette.png" type="Texture" id=10]
+[ext_resource path="res://Music/Music1.mp3" type="AudioStream" id=11]
+[ext_resource path="res://Music/LevelStartSound.mp3" type="AudioStream" id=12]
+[ext_resource path="res://Music/LevelStepMusic.mp3" type="AudioStream" id=13]
 [ext_resource path="res://Scenes/Splotch1.tscn" type="PackedScene" id=17]
 
 [sub_resource type="CircleShape2D" id=2]
@@ -35,6 +38,27 @@ glow_high_quality = true
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
 _splotch1_scene = ExtResource( 17 )
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 11 )
+autoplay = true
+bus = "Music"
+
+[node name="LevelStartSound" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 12 )
+bus = "Music"
+
+[node name="LevelEndMusic" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 12 )
+bus = "Music"
+
+[node name="LevelStepMusic" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 13 )
+bus = "Music"
 
 [node name="GameStateMachine" type="Node" parent="."]
 pause_mode = 2
