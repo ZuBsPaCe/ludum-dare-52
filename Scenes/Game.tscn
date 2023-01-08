@@ -80,6 +80,7 @@ script = ExtResource( 4 )
 [node name="MainMenu" parent="." instance=ExtResource( 3 )]
 
 [node name="GameOverlay" parent="." instance=ExtResource( 5 )]
+visible = false
 
 [node name="Vignette" type="CanvasLayer" parent="."]
 

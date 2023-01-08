@@ -111,6 +111,8 @@ func _ready():
 	
 	set_fullscreen(Globals.get_setting(Globals.SETTING_FULLSCREEN))
 	
+	$MainMenu.connect("change_volume", self, "change_volume")
+		
 	$MainMenu.setup(
 		Globals.get_setting(Globals.SETTING_MUSIC_VOLUME),
 		Globals.get_setting(Globals.SETTING_SOUND_VOLUME))
@@ -119,7 +121,7 @@ func _ready():
 	$GameOverlay.visible = false
 	
 	$MainMenu.connect("switch_game_state", self, "switch_game_state")
-	$MainMenu.connect("change_volume", self, "change_volume")
+
 	$GameOverlay.connect("switch_game_state", self, "switch_game_state")
 	
 	get_tree().connect("screen_resized", self, "on_screen_resized")
@@ -415,10 +417,21 @@ func _stop_level():
 	_timber_level_done_player.stop()
 	_timber_level_woodcut_player.stop()
 	
+	_farm_level_done_player.play("RESET")
+	_flower_level_done_player.play("RESET")
+	_apple_level_done_player.play("RESET")
+	_timber_level_done_player.play("RESET")
+	_timber_level_woodcut_player.play("RESET")
+	
 	_farm_intro_player.stop()
 	_flower_intro_player.stop()
 	_apple_intro_player.stop()
 	_timber_intro_player.stop()
+	
+	_farm_intro_player.play("RESET")
+	_flower_intro_player.play("RESET")
+	_apple_intro_player.play("RESET")
+	_timber_intro_player.play("RESET")
 	
 
 func _start_level(level):
@@ -586,19 +599,7 @@ func _on_FlowerLevel_enter_state():
 func _on_FlowerLevel_process_state():	
 	match _flower_level_state.current:
 		FlowerLevelState.RESET:
-			_world_nodes["AppleTreeSmall"].material_override.set_shader_param("reveal_tex", _reveal_viewport1.get_texture())
-			_world_nodes["AppleTreeSmall"].material_override.set_shader_param("hide", 0.0)
-			
-			_world_nodes["AppleLeavesSmall"].material_override.set_shader_param("reveal_tex", _reveal_viewport1.get_texture())
-			_world_nodes["AppleLeavesSmall"].material_override.set_shader_param("hide", 0.0)
-			
-			_area_groups[Globals.AREAS_APPLE_MEDIUM_TREE].activate()
-		
-			_world_nodes["AppleTreeMedium"].material_override.set_shader_param("reveal_tex", _reveal_viewport2.get_texture())
-			_world_nodes["AppleTreeMedium"].material_override.set_shader_param("hide", 0.0)
-			
-			_world_nodes["AppleLeavesMedium"].material_override.set_shader_param("reveal_tex", _reveal_viewport2.get_texture())
-			_world_nodes["AppleLeavesMedium"].material_override.set_shader_param("hide", 0.0)
+			pass
 				
 		FlowerLevelState.FLOWER_HILLS:
 			if _area_groups[Globals.AREAS_FLOWER_HILLS].revealed:
@@ -639,6 +640,18 @@ func _on_FlowerLevel_exit_state():
 func _on_AppleLevel_enter_state():
 	match _apple_level_state.current:
 		AppleLevelState.RESET:
+			_world_nodes["AppleTreeSmall"].material_override.set_shader_param("reveal_tex", _reveal_viewport1.get_texture())
+			_world_nodes["AppleTreeSmall"].material_override.set_shader_param("hide", 0.0)
+			
+			_world_nodes["AppleLeavesSmall"].material_override.set_shader_param("reveal_tex", _reveal_viewport1.get_texture())
+			_world_nodes["AppleLeavesSmall"].material_override.set_shader_param("hide", 0.0)
+		
+			_world_nodes["AppleTreeMedium"].material_override.set_shader_param("reveal_tex", _reveal_viewport2.get_texture())
+			_world_nodes["AppleTreeMedium"].material_override.set_shader_param("hide", 0.0)
+			
+			_world_nodes["AppleLeavesMedium"].material_override.set_shader_param("reveal_tex", _reveal_viewport2.get_texture())
+			_world_nodes["AppleLeavesMedium"].material_override.set_shader_param("hide", 0.0)
+			
 			_apple_level_state.set_state_immediate(AppleLevelState.APPLE_SMALL_TREE)
 		
 		AppleLevelState.APPLE_SMALL_TREE:
@@ -665,7 +678,7 @@ func _on_AppleLevel_enter_state():
 			_area_groups[Globals.AREAS_APPLE_LARGE_TREE].activate()
 		
 		AppleLevelState.APPLE_FRUITS:
-			$LevelStepMusic.play()
+			#$LevelStepMusic.play()
 			_area_groups[Globals.AREAS_APPLE_FRUITS].activate()
 		
 		AppleLevelState.APPLE_PATH:
@@ -674,7 +687,7 @@ func _on_AppleLevel_enter_state():
 			_area_groups[Globals.AREAS_APPLE_NEWTON_WALK1].activate()
 		
 		AppleLevelState.APPLE_NEWTON_SIT:
-			$LevelStepMusic.play()
+#			$LevelStepMusic.play()
 			_area_groups[Globals.AREAS_APPLE_NEWTON_SIT].activate()
 			
 		AppleLevelState.APPLE_NEWTON_HEUREKA:
@@ -717,29 +730,30 @@ func _on_AppleLevel_process_state():
 				_apple_level_state.set_state(AppleLevelState.APPLE_PATH)
 		
 		AppleLevelState.APPLE_PATH:
-			if _area_groups[Globals.AREAS_APPLE_NEWTON_WALK1].can_reveal:
-				if !_area_groups[Globals.AREAS_APPLE_NEWTON_WALK2].active:
-					_area_groups[Globals.AREAS_APPLE_NEWTON_WALK2].activate()
-			else:
-				if _area_groups[Globals.AREAS_APPLE_NEWTON_WALK2].active:
-					_area_groups[Globals.AREAS_APPLE_NEWTON_WALK2].deactivate()
-			
-			if _area_groups[Globals.AREAS_APPLE_NEWTON_WALK2].can_reveal:
-				if !_area_groups[Globals.AREAS_APPLE_NEWTON_WALK3].active:
-					_area_groups[Globals.AREAS_APPLE_NEWTON_WALK3].activate()
-			else:
-				if _area_groups[Globals.AREAS_APPLE_NEWTON_WALK3].active:
-					_area_groups[Globals.AREAS_APPLE_NEWTON_WALK3].deactivate()
-			
+			if _area_groups[Globals.AREAS_APPLE_NEWTON_WALK4].can_reveal:
+				_apple_level_state.set_state(AppleLevelState.APPLE_NEWTON_SIT)		
+				
 			if _area_groups[Globals.AREAS_APPLE_NEWTON_WALK3].can_reveal:
 				if !_area_groups[Globals.AREAS_APPLE_NEWTON_WALK4].active:
 					_area_groups[Globals.AREAS_APPLE_NEWTON_WALK4].activate()
 			else:
 				if _area_groups[Globals.AREAS_APPLE_NEWTON_WALK4].active:
 					_area_groups[Globals.AREAS_APPLE_NEWTON_WALK4].deactivate()
-			
-			if _area_groups[Globals.AREAS_APPLE_NEWTON_WALK4].can_reveal:
-				_apple_level_state.set_state(AppleLevelState.APPLE_NEWTON_SIT)
+					
+			if _area_groups[Globals.AREAS_APPLE_NEWTON_WALK2].can_reveal:
+				if !_area_groups[Globals.AREAS_APPLE_NEWTON_WALK3].active:
+					_area_groups[Globals.AREAS_APPLE_NEWTON_WALK3].activate()
+			else:
+				if _area_groups[Globals.AREAS_APPLE_NEWTON_WALK3].active:
+					_area_groups[Globals.AREAS_APPLE_NEWTON_WALK3].deactivate()
+				
+			if _area_groups[Globals.AREAS_APPLE_NEWTON_WALK1].can_reveal:
+				if !_area_groups[Globals.AREAS_APPLE_NEWTON_WALK2].active:
+					_area_groups[Globals.AREAS_APPLE_NEWTON_WALK2].activate()
+			else:
+				if _area_groups[Globals.AREAS_APPLE_NEWTON_WALK2].active:
+					_area_groups[Globals.AREAS_APPLE_NEWTON_WALK2].deactivate()	
+
 				
 		AppleLevelState.APPLE_NEWTON_SIT:
 			if _area_groups[Globals.AREAS_APPLE_NEWTON_SIT].revealed:

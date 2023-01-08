@@ -1358,6 +1358,7 @@ anims/LevelDone = SubResource( 1 )
 anims/RESET = SubResource( 2 )
 
 [node name="FlowerIntroPlayer" type="AnimationPlayer" parent="Flower"]
+pause_mode = 2
 root_node = NodePath("../../Farm")
 anims/Intro = SubResource( 20 )
 anims/RESET = SubResource( 21 )
@@ -1535,6 +1536,7 @@ anims/LevelDone = SubResource( 6 )
 anims/RESET = SubResource( 7 )
 
 [node name="FarmIntroPlayer" type="AnimationPlayer" parent="Farm"]
+pause_mode = 2
 anims/Intro = SubResource( 18 )
 anims/RESET = SubResource( 19 )
 
@@ -1704,6 +1706,7 @@ anims/LevelDone = SubResource( 8 )
 anims/RESET = SubResource( 9 )
 
 [node name="AppleIntroPlayer" type="AnimationPlayer" parent="Apple"]
+pause_mode = 2
 root_node = NodePath("../../Farm")
 anims/Intro = SubResource( 22 )
 anims/RESET = SubResource( 23 )
@@ -1895,6 +1898,7 @@ anims/LevelDone = SubResource( 12 )
 anims/RESET = SubResource( 13 )
 
 [node name="TimberIntroPlayer" type="AnimationPlayer" parent="Timber"]
+pause_mode = 2
 root_node = NodePath("../../Farm")
 anims/Intro = SubResource( 24 )
 anims/RESET = SubResource( 25 )
