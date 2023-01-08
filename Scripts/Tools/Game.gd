@@ -267,7 +267,15 @@ func _process(_delta):
 	
 	$RevealCursor.position = Globals.get_global_mouse_position()
 	
-	if Input.is_mouse_button_pressed(BUTTON_LEFT) && _splotch_countdown.done:
+	
+	var intro_playing =	(
+		!_farm_intro_player.current_animation.empty() ||
+		!_flower_intro_player.current_animation.empty() ||
+		!_apple_intro_player.current_animation.empty() ||
+		!_timber_intro_player.current_animation.empty())
+	
+	#if Input.is_mouse_button_pressed(BUTTON_LEFT) && _splotch_countdown.done:
+	if !intro_playing && _splotch_countdown.done:
 		_splotch_countdown.restart()
 		
 		var pos := Globals.get_global_mouse_position()
@@ -578,7 +586,19 @@ func _on_FlowerLevel_enter_state():
 func _on_FlowerLevel_process_state():	
 	match _flower_level_state.current:
 		FlowerLevelState.RESET:
-			pass
+			_world_nodes["AppleTreeSmall"].material_override.set_shader_param("reveal_tex", _reveal_viewport1.get_texture())
+			_world_nodes["AppleTreeSmall"].material_override.set_shader_param("hide", 0.0)
+			
+			_world_nodes["AppleLeavesSmall"].material_override.set_shader_param("reveal_tex", _reveal_viewport1.get_texture())
+			_world_nodes["AppleLeavesSmall"].material_override.set_shader_param("hide", 0.0)
+			
+			_area_groups[Globals.AREAS_APPLE_MEDIUM_TREE].activate()
+		
+			_world_nodes["AppleTreeMedium"].material_override.set_shader_param("reveal_tex", _reveal_viewport2.get_texture())
+			_world_nodes["AppleTreeMedium"].material_override.set_shader_param("hide", 0.0)
+			
+			_world_nodes["AppleLeavesMedium"].material_override.set_shader_param("reveal_tex", _reveal_viewport2.get_texture())
+			_world_nodes["AppleLeavesMedium"].material_override.set_shader_param("hide", 0.0)
 				
 		FlowerLevelState.FLOWER_HILLS:
 			if _area_groups[Globals.AREAS_FLOWER_HILLS].revealed:
@@ -595,6 +615,7 @@ func _on_FlowerLevel_process_state():
 		FlowerLevelState.FLOWER_BEEHIVE_SUN_FIELD:
 			if (!_area_groups[Globals.AREAS_FLOWER_BEES].active and
 				_area_groups[Globals.AREAS_FLOWER_SUN].revealed):
+				$LevelStepMusic.play()
 				_area_groups[Globals.AREAS_FLOWER_BEES].activate()
 			
 			if (_area_groups[Globals.AREAS_FLOWER_FIELD].can_reveal and 
@@ -624,7 +645,7 @@ func _on_AppleLevel_enter_state():
 			_area_groups[Globals.AREAS_APPLE_SMALL_TREE].activate()
 
 		AppleLevelState.APPLE_MEDIUM_TREE:
-			$LevelStepMusic.play()
+#			$LevelStepMusic.play()
 			_world_nodes["AppleTreeSmall"].material_override.set_shader_param("reveal_tex", _reveal_viewport2.get_texture())
 			_world_nodes["AppleTreeSmall"].material_override.set_shader_param("hide", 1.0)
 			
@@ -634,7 +655,7 @@ func _on_AppleLevel_enter_state():
 			_area_groups[Globals.AREAS_APPLE_MEDIUM_TREE].activate()
 		
 		AppleLevelState.APPLE_LARGE_TREE:
-			$LevelStepMusic.play()
+#			$LevelStepMusic.play()
 			_world_nodes["AppleTreeMedium"].material_override.set_shader_param("reveal_tex", _reveal_viewport3.get_texture())
 			_world_nodes["AppleTreeMedium"].material_override.set_shader_param("hide", 1.0)
 			
@@ -675,16 +696,19 @@ func _on_AppleLevel_process_state():
 						
 		AppleLevelState.APPLE_SMALL_TREE:
 			if _area_groups[Globals.AREAS_APPLE_SMALL_TREE].revealed:
+				$LevelStepMusic.play()
 				_apple_level_state.set_state(AppleLevelState.APPLE_MEDIUM_TREE)
 				_apple_level_state.wait(3.0)
 
 		AppleLevelState.APPLE_MEDIUM_TREE:
 			if _area_groups[Globals.AREAS_APPLE_MEDIUM_TREE].revealed:
+				$LevelStepMusic.play()
 				_apple_level_state.set_state(AppleLevelState.APPLE_LARGE_TREE)
 				_apple_level_state.wait(3.0)
 		
 		AppleLevelState.APPLE_LARGE_TREE:
 			if _area_groups[Globals.AREAS_APPLE_LARGE_TREE].revealed:
+				$LevelStepMusic.play()
 				_apple_level_state.set_state(AppleLevelState.APPLE_FRUITS)
 				_apple_level_state.wait(3.0)
 				
