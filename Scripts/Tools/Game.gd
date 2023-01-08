@@ -86,6 +86,12 @@ onready var _apple_level_done_player := $Levels/BackgroundContainer/Viewport/Wor
 onready var _timber_level_woodcut_player := $Levels/BackgroundContainer/Viewport/World/Timber/TimberLevelWoodcutPlayer
 onready var _timber_level_done_player := $Levels/BackgroundContainer/Viewport/World/Timber/TimberLevelDonePlayer
 
+onready var _farm_intro_player := $Levels/BackgroundContainer/Viewport/World/Farm/FarmIntroPlayer
+onready var _flower_intro_player := $Levels/BackgroundContainer/Viewport/World/Flower/FlowerIntroPlayer
+onready var _apple_intro_player := $Levels/BackgroundContainer/Viewport/World/Apple/AppleIntroPlayer
+onready var _timber_intro_player := $Levels/BackgroundContainer/Viewport/World/Timber/TimberIntroPlayer
+
+
 onready var _flower_node := $Levels/BackgroundContainer/Viewport/World/Flower
 onready var _farm_node := $Levels/BackgroundContainer/Viewport/World/Farm
 onready var _apple_node := $Levels/BackgroundContainer/Viewport/World/Apple
@@ -340,7 +346,7 @@ func _on_GameStateMachine_enter_state():
 		GameState.START:
 			$MainMenu.visible = false
 			
-			_start_level(Level.TIMBER)
+			_start_level(Level.FLOWER)
 			
 			switch_game_state(GameState.GAME)
 
@@ -401,31 +407,55 @@ func _stop_level():
 	_timber_level_done_player.stop()
 	_timber_level_woodcut_player.stop()
 	
+	_farm_intro_player.stop()
+	_flower_intro_player.stop()
+	_apple_intro_player.stop()
+	_timber_intro_player.stop()
+	
 
 func _start_level(level):
 	_stop_level()
 	
 	match level:
 		Level.FARM:
+			_farm_intro_player.play("Intro")
+			yield(get_tree().create_timer(0.2), "timeout")
+			
 			_farm_node.visible = true
 			_farm_level_state.set_state_immediate(FarmLevelState.RESET)
 			_farm_level_state.set_process(true)
+			
+			
 		
 		Level.FLOWER:
+			_flower_intro_player.play("Intro")
+			yield(get_tree().create_timer(0.2), "timeout")
+			
 			_flower_node.visible = true
 			_flower_level_state.set_state_immediate(FlowerLevelState.RESET)
 			_flower_level_state.set_process(true)
 			
+
+			
 		Level.APPLE:
+			_apple_intro_player.play("Intro")
+			yield(get_tree().create_timer(0.2), "timeout")
+			
 			_apple_node.visible = true
 			_apple_level_state.set_state_immediate(AppleLevelState.RESET)
 			_apple_level_state.set_process(true)
 			
+
+			
 		Level.TIMBER:
+			_timber_intro_player.play("Intro")
+			yield(get_tree().create_timer(0.2), "timeout")
+			
 			_timber_node.visible = true
 			_timber_level_state.set_state_immediate(TimberLevelState.RESET)
 			_timber_level_state.set_process(true)
-		
+			
+			
 		_:
 			pass
 			

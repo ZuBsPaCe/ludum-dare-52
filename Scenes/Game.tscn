@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scripts/Tools/Game.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Tools/CameraShake.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Sprites/Helpers/White-1920x1080.png" type="Texture" id=7]
 [ext_resource path="res://Scripts/RevealViewport.gd" type="Script" id=8]
 [ext_resource path="res://Scripts/AreaGroup.gd" type="Script" id=9]
+[ext_resource path="res://Sprites/Helpers/Vignette.png" type="Texture" id=10]
 [ext_resource path="res://Scenes/Splotch1.tscn" type="PackedScene" id=17]
 
 [sub_resource type="CircleShape2D" id=2]
@@ -25,8 +26,8 @@ background_mode = 4
 background_canvas_max_layer = 1
 glow_enabled = true
 glow_levels/4 = true
-glow_intensity = 1.55
-glow_strength = 1.35
+glow_intensity = 1.44
+glow_strength = 1.24
 glow_blend_mode = 1
 glow_bicubic_upscale = true
 glow_high_quality = true
@@ -54,6 +55,15 @@ script = ExtResource( 4 )
 [node name="MainMenu" parent="." instance=ExtResource( 3 )]
 
 [node name="GameOverlay" parent="." instance=ExtResource( 5 )]
+
+[node name="Vignette" type="CanvasLayer" parent="."]
+
+[node name="Vignette" type="TextureRect" parent="Vignette"]
+self_modulate = Color( 1, 1, 1, 0.247059 )
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource( 10 )
 
 [node name="EntityContainer" type="Node2D" parent="."]
 
